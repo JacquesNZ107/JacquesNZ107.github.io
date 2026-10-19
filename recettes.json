@@ -1,433 +1,712 @@
 {
   "recipes": [
-    { "id": "s01", "name": "Poulet au citron & patate douce", "portions": 4, "ingredients": [
-      { "id": "s01a", "name": "Blanc de poulet", "qty": 800, "unit": "g" },
-      { "id": "s01b", "name": "Patate douce", "qty": 800, "unit": "g" },
-      { "id": "s01c", "name": "Citron", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s01d", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s01e", "name": "Herbes de Provence", "qty": 1, "unit": "cc" },
-      { "id": "s01f", "name": "Ail", "qty": 2, "unit": "gousse(s)" }
-    ]},
-    { "id": "s02", "name": "Bowl poulet, riz & brocoli", "portions": 4, "ingredients": [
-      { "id": "s02a", "name": "Blanc de poulet", "qty": 600, "unit": "g" },
-      { "id": "s02b", "name": "Riz basmati", "qty": 320, "unit": "g" },
-      { "id": "s02c", "name": "Brocoli", "qty": 500, "unit": "g" },
-      { "id": "s02d", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s02e", "name": "Sauce soja", "qty": 2, "unit": "cs" },
-      { "id": "s02f", "name": "Graines de sésame", "qty": 1, "unit": "cs" }
-    ]},
-    { "id": "s03", "name": "Poulet au paprika fumé & riz complet", "portions": 4, "ingredients": [
-      { "id": "s03a", "name": "Blanc de poulet", "qty": 800, "unit": "g" },
-      { "id": "s03b", "name": "Riz complet", "qty": 320, "unit": "g" },
-      { "id": "s03c", "name": "Paprika fumé", "qty": 2, "unit": "cs" },
-      { "id": "s03d", "name": "Tomates concassées", "qty": 400, "unit": "g" },
-      { "id": "s03e", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s03f", "name": "Poivron rouge", "qty": 1, "unit": "pièce(s)" }
-    ]},
-    { "id": "s04", "name": "Émincé de poulet, poivrons & boulgour", "portions": 4, "ingredients": [
-      { "id": "s04a", "name": "Blanc de poulet", "qty": 700, "unit": "g" },
-      { "id": "s04b", "name": "Boulgour", "qty": 320, "unit": "g" },
-      { "id": "s04c", "name": "Poivron rouge", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s04d", "name": "Poivron vert", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s04e", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s04f", "name": "Huile d'olive", "qty": 2, "unit": "cs" }
-    ]},
-    { "id": "s05", "name": "Poulet moutarde & miel, quinoa", "portions": 4, "ingredients": [
-      { "id": "s05a", "name": "Blanc de poulet", "qty": 800, "unit": "g" },
-      { "id": "s05b", "name": "Quinoa", "qty": 300, "unit": "g" },
-      { "id": "s05c", "name": "Moutarde", "qty": 3, "unit": "cs" },
-      { "id": "s05d", "name": "Miel", "qty": 2, "unit": "cs" },
-      { "id": "s05e", "name": "Courgette", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s05f", "name": "Huile d'olive", "qty": 1, "unit": "cs" }
-    ]},
-    { "id": "s06", "name": "Poulet aux champignons & pâtes complètes", "portions": 4, "ingredients": [
-      { "id": "s06a", "name": "Blanc de poulet", "qty": 600, "unit": "g" },
-      { "id": "s06b", "name": "Pâtes complètes", "qty": 400, "unit": "g" },
-      { "id": "s06c", "name": "Champignons de Paris", "qty": 400, "unit": "g" },
-      { "id": "s06d", "name": "Crème fraîche", "qty": 200, "unit": "ml" },
-      { "id": "s06e", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s06f", "name": "Ail", "qty": 1, "unit": "gousse(s)" }
-    ]},
-    { "id": "s07", "name": "Tajine de poulet, pois chiches & semoule", "portions": 4, "ingredients": [
-      { "id": "s07a", "name": "Blanc de poulet", "qty": 800, "unit": "g" },
-      { "id": "s07b", "name": "Semoule", "qty": 400, "unit": "g" },
-      { "id": "s07c", "name": "Carotte", "qty": 3, "unit": "pièce(s)" },
-      { "id": "s07d", "name": "Courgette", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s07e", "name": "Pois chiches (boîte)", "qty": 400, "unit": "g" },
-      { "id": "s07f", "name": "Ras-el-hanout", "qty": 2, "unit": "cs" },
-      { "id": "s07g", "name": "Tomates concassées", "qty": 400, "unit": "g" }
-    ]},
-    { "id": "s08", "name": "Poulet teriyaki & riz", "portions": 4, "ingredients": [
-      { "id": "s08a", "name": "Blanc de poulet", "qty": 700, "unit": "g" },
-      { "id": "s08b", "name": "Riz basmati", "qty": 320, "unit": "g" },
-      { "id": "s08c", "name": "Sauce soja", "qty": 4, "unit": "cs" },
-      { "id": "s08d", "name": "Miel", "qty": 2, "unit": "cs" },
-      { "id": "s08e", "name": "Gingembre en poudre", "qty": 1, "unit": "cc" },
-      { "id": "s08f", "name": "Graines de sésame", "qty": 1, "unit": "cs" },
-      { "id": "s08g", "name": "Brocoli", "qty": 400, "unit": "g" }
-    ]},
-    { "id": "s09", "name": "Salade tiède poulet & lentilles", "portions": 4, "ingredients": [
-      { "id": "s09a", "name": "Blanc de poulet", "qty": 400, "unit": "g" },
-      { "id": "s09b", "name": "Lentilles vertes", "qty": 300, "unit": "g" },
-      { "id": "s09c", "name": "Tomates cerises", "qty": 250, "unit": "g" },
-      { "id": "s09d", "name": "Oignon rouge", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s09e", "name": "Moutarde", "qty": 1, "unit": "cs" },
-      { "id": "s09f", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s09g", "name": "Vinaigre de vin", "qty": 1, "unit": "cs" }
-    ]},
-    { "id": "s10", "name": "Poulet basquaise & riz", "portions": 4, "ingredients": [
-      { "id": "s10a", "name": "Blanc de poulet", "qty": 800, "unit": "g" },
-      { "id": "s10b", "name": "Riz basmati", "qty": 320, "unit": "g" },
-      { "id": "s10c", "name": "Poivron rouge", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s10d", "name": "Poivron vert", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s10e", "name": "Tomates concassées", "qty": 400, "unit": "g" },
-      { "id": "s10f", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s10g", "name": "Piment d'Espelette", "qty": 1, "unit": "cc" }
-    ]},
-    { "id": "s11", "name": "Bœuf bourguignon léger", "portions": 4, "ingredients": [
-      { "id": "s11a", "name": "Bœuf à braiser", "qty": 800, "unit": "g" },
-      { "id": "s11b", "name": "Carotte", "qty": 3, "unit": "pièce(s)" },
-      { "id": "s11c", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s11d", "name": "Champignons de Paris", "qty": 250, "unit": "g" },
-      { "id": "s11e", "name": "Tomates concassées", "qty": 400, "unit": "g" },
-      { "id": "s11f", "name": "Pomme de terre", "qty": 600, "unit": "g" },
-      { "id": "s11g", "name": "Thym séché", "qty": 1, "unit": "cc" }
-    ]},
-    { "id": "s12", "name": "Chili con carne", "portions": 4, "ingredients": [
-      { "id": "s12a", "name": "Bœuf haché 5%", "qty": 500, "unit": "g" },
-      { "id": "s12b", "name": "Haricots rouges (boîte)", "qty": 400, "unit": "g" },
-      { "id": "s12c", "name": "Maïs (boîte)", "qty": 300, "unit": "g" },
-      { "id": "s12d", "name": "Tomates concassées", "qty": 800, "unit": "g" },
-      { "id": "s12e", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s12f", "name": "Poivron rouge", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s12g", "name": "Paprika fumé", "qty": 1, "unit": "cs" },
-      { "id": "s12h", "name": "Riz basmati", "qty": 300, "unit": "g" }
-    ]},
-    { "id": "s13", "name": "Bœuf sauté aux brocolis & riz", "portions": 4, "ingredients": [
-      { "id": "s13a", "name": "Bœuf à stir-fry", "qty": 600, "unit": "g" },
-      { "id": "s13b", "name": "Brocoli", "qty": 500, "unit": "g" },
-      { "id": "s13c", "name": "Riz basmati", "qty": 320, "unit": "g" },
-      { "id": "s13d", "name": "Sauce soja", "qty": 3, "unit": "cs" },
-      { "id": "s13e", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s13f", "name": "Gingembre en poudre", "qty": 1, "unit": "cc" },
-      { "id": "s13g", "name": "Ail", "qty": 2, "unit": "gousse(s)" }
-    ]},
-    { "id": "s14", "name": "Boulettes de bœuf & légumes", "portions": 4, "ingredients": [
-      { "id": "s14a", "name": "Bœuf haché 5%", "qty": 600, "unit": "g" },
-      { "id": "s14b", "name": "Pomme de terre", "qty": 700, "unit": "g" },
-      { "id": "s14c", "name": "Carotte", "qty": 3, "unit": "pièce(s)" },
-      { "id": "s14d", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s14e", "name": "Œufs", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s14f", "name": "Chapelure", "qty": 4, "unit": "cs" },
-      { "id": "s14g", "name": "Tomates concassées", "qty": 400, "unit": "g" }
-    ]},
-    { "id": "s15", "name": "Burrito bowl bœuf & haricots noirs", "portions": 4, "ingredients": [
-      { "id": "s15a", "name": "Bœuf haché 5%", "qty": 500, "unit": "g" },
-      { "id": "s15b", "name": "Haricots noirs (boîte)", "qty": 400, "unit": "g" },
-      { "id": "s15c", "name": "Riz basmati", "qty": 320, "unit": "g" },
-      { "id": "s15d", "name": "Maïs (boîte)", "qty": 200, "unit": "g" },
-      { "id": "s15e", "name": "Tomate", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s15f", "name": "Épices mexicaines", "qty": 2, "unit": "cs" }
-    ]},
-    { "id": "s16", "name": "Chili végétarien", "portions": 4, "ingredients": [
-      { "id": "s16a", "name": "Haricots rouges (boîte)", "qty": 400, "unit": "g" },
-      { "id": "s16b", "name": "Maïs (boîte)", "qty": 300, "unit": "g" },
-      { "id": "s16c", "name": "Tomates concassées", "qty": 800, "unit": "g" },
-      { "id": "s16d", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s16e", "name": "Poivron rouge", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s16f", "name": "Riz basmati", "qty": 300, "unit": "g" },
-      { "id": "s16g", "name": "Paprika fumé", "qty": 1, "unit": "cs" }
-    ]},
-    { "id": "s17", "name": "Dahl de lentilles corail & épinards", "portions": 4, "ingredients": [
-      { "id": "s17a", "name": "Lentilles corail", "qty": 300, "unit": "g" },
-      { "id": "s17b", "name": "Lait de coco", "qty": 400, "unit": "ml" },
-      { "id": "s17c", "name": "Tomates concassées", "qty": 400, "unit": "g" },
-      { "id": "s17d", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s17e", "name": "Ail", "qty": 2, "unit": "gousse(s)" },
-      { "id": "s17f", "name": "Curry en poudre", "qty": 2, "unit": "cs" },
-      { "id": "s17g", "name": "Riz basmati", "qty": 300, "unit": "g" },
-      { "id": "s17h", "name": "Épinards", "qty": 300, "unit": "g" }
-    ]},
-    { "id": "s18", "name": "Curry de pois chiches & épinards", "portions": 4, "ingredients": [
-      { "id": "s18a", "name": "Pois chiches (boîte)", "qty": 600, "unit": "g" },
-      { "id": "s18b", "name": "Épinards", "qty": 400, "unit": "g" },
-      { "id": "s18c", "name": "Lait de coco", "qty": 400, "unit": "ml" },
-      { "id": "s18d", "name": "Tomates concassées", "qty": 400, "unit": "g" },
-      { "id": "s18e", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s18f", "name": "Curry en poudre", "qty": 2, "unit": "cs" },
-      { "id": "s18g", "name": "Riz basmati", "qty": 320, "unit": "g" }
-    ]},
-    { "id": "s19", "name": "Ratatouille & boulgour", "portions": 4, "ingredients": [
-      { "id": "s19a", "name": "Courgette", "qty": 3, "unit": "pièce(s)" },
-      { "id": "s19b", "name": "Aubergine", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s19c", "name": "Poivron rouge", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s19d", "name": "Tomates concassées", "qty": 800, "unit": "g" },
-      { "id": "s19e", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s19f", "name": "Boulgour", "qty": 320, "unit": "g" },
-      { "id": "s19g", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s19h", "name": "Basilic séché", "qty": 1, "unit": "cc" }
-    ]},
-    { "id": "s20", "name": "Tofu sauté aux légumes & riz", "portions": 4, "ingredients": [
-      { "id": "s20a", "name": "Tofu ferme", "qty": 400, "unit": "g" },
-      { "id": "s20b", "name": "Brocoli", "qty": 400, "unit": "g" },
-      { "id": "s20c", "name": "Carotte", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s20d", "name": "Riz basmati", "qty": 320, "unit": "g" },
-      { "id": "s20e", "name": "Sauce soja", "qty": 3, "unit": "cs" },
-      { "id": "s20f", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s20g", "name": "Graines de sésame", "qty": 1, "unit": "cs" },
-      { "id": "s20h", "name": "Gingembre en poudre", "qty": 1, "unit": "cc" }
-    ]},
-    { "id": "s21", "name": "Curry de tofu, patate douce & petits pois", "portions": 4, "ingredients": [
-      { "id": "s21a", "name": "Tofu ferme", "qty": 400, "unit": "g" },
-      { "id": "s21b", "name": "Lait de coco", "qty": 400, "unit": "ml" },
-      { "id": "s21c", "name": "Patate douce", "qty": 400, "unit": "g" },
-      { "id": "s21d", "name": "Petits pois", "qty": 300, "unit": "g" },
-      { "id": "s21e", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s21f", "name": "Curry en poudre", "qty": 2, "unit": "cs" },
-      { "id": "s21g", "name": "Riz basmati", "qty": 320, "unit": "g" }
-    ]},
-    { "id": "s22", "name": "Soupe de lentilles aux légumes", "portions": 4, "ingredients": [
-      { "id": "s22a", "name": "Lentilles vertes", "qty": 300, "unit": "g" },
-      { "id": "s22b", "name": "Carotte", "qty": 3, "unit": "pièce(s)" },
-      { "id": "s22c", "name": "Poireau", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s22d", "name": "Tomates concassées", "qty": 400, "unit": "g" },
-      { "id": "s22e", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s22f", "name": "Bouillon de légumes", "qty": 1, "unit": "L" },
-      { "id": "s22g", "name": "Cumin", "qty": 1, "unit": "cc" }
-    ]},
-    { "id": "s23", "name": "Falafels au four & bowl", "portions": 4, "ingredients": [
-      { "id": "s23a", "name": "Pois chiches (boîte)", "qty": 500, "unit": "g" },
-      { "id": "s23b", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s23c", "name": "Ail", "qty": 2, "unit": "gousse(s)" },
-      { "id": "s23d", "name": "Persil frais", "qty": 30, "unit": "g" },
-      { "id": "s23e", "name": "Cumin", "qty": 1, "unit": "cc" },
-      { "id": "s23f", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s23g", "name": "Pitas", "qty": 4, "unit": "pièce(s)" },
-      { "id": "s23h", "name": "Yaourt nature", "qty": 200, "unit": "g" }
-    ]},
-    { "id": "s24", "name": "Pois chiches rôtis, semoule & crudités", "portions": 4, "ingredients": [
-      { "id": "s24a", "name": "Pois chiches (boîte)", "qty": 600, "unit": "g" },
-      { "id": "s24b", "name": "Semoule", "qty": 320, "unit": "g" },
-      { "id": "s24c", "name": "Courgette", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s24d", "name": "Tomate", "qty": 3, "unit": "pièce(s)" },
-      { "id": "s24e", "name": "Oignon rouge", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s24f", "name": "Paprika fumé", "qty": 1, "unit": "cs" },
-      { "id": "s24g", "name": "Huile d'olive", "qty": 2, "unit": "cs" }
-    ]},
-    { "id": "s25", "name": "Gratin de pâtes au saumon", "portions": 4, "ingredients": [
-      { "id": "s25a", "name": "Pâtes (penne)", "qty": 400, "unit": "g" },
-      { "id": "s25b", "name": "Saumon", "qty": 400, "unit": "g" },
-      { "id": "s25c", "name": "Crème fraîche", "qty": 400, "unit": "ml" },
-      { "id": "s25d", "name": "Gruyère râpé", "qty": 150, "unit": "g" },
-      { "id": "s25e", "name": "Citron", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s25f", "name": "Épinards", "qty": 300, "unit": "g" }
-    ]},
-    { "id": "s26", "name": "Saumon au four, riz & courgette", "portions": 4, "ingredients": [
-      { "id": "s26a", "name": "Saumon", "qty": 600, "unit": "g" },
-      { "id": "s26b", "name": "Riz basmati", "qty": 320, "unit": "g" },
-      { "id": "s26c", "name": "Courgette", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s26d", "name": "Citron", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s26e", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s26f", "name": "Aneth séché", "qty": 1, "unit": "cc" }
-    ]},
-    { "id": "s27", "name": "Cabillaud & purée maison", "portions": 4, "ingredients": [
-      { "id": "s27a", "name": "Cabillaud", "qty": 600, "unit": "g" },
-      { "id": "s27b", "name": "Pomme de terre", "qty": 800, "unit": "g" },
-      { "id": "s27c", "name": "Lait", "qty": 200, "unit": "ml" },
-      { "id": "s27d", "name": "Épinards", "qty": 300, "unit": "g" },
-      { "id": "s27e", "name": "Ail", "qty": 1, "unit": "gousse(s)" },
-      { "id": "s27f", "name": "Huile d'olive", "qty": 1, "unit": "cs" }
-    ]},
-    { "id": "s28", "name": "Papillote de saumon & quinoa", "portions": 4, "ingredients": [
-      { "id": "s28a", "name": "Saumon", "qty": 600, "unit": "g" },
-      { "id": "s28b", "name": "Courgette", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s28c", "name": "Carotte", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s28d", "name": "Citron", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s28e", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s28f", "name": "Quinoa", "qty": 300, "unit": "g" }
-    ]},
-    { "id": "s29", "name": "Bowl thon, patate douce & œufs", "portions": 4, "ingredients": [
-      { "id": "s29a", "name": "Thon (boîte)", "qty": 400, "unit": "g" },
-      { "id": "s29b", "name": "Patate douce", "qty": 600, "unit": "g" },
-      { "id": "s29c", "name": "Œufs", "qty": 4, "unit": "pièce(s)" },
-      { "id": "s29d", "name": "Tomates cerises", "qty": 250, "unit": "g" },
-      { "id": "s29e", "name": "Avocat", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s29f", "name": "Huile d'olive", "qty": 2, "unit": "cs" }
-    ]},
-    { "id": "s30", "name": "Cabillaud aux lentilles", "portions": 4, "ingredients": [
-      { "id": "s30a", "name": "Cabillaud", "qty": 600, "unit": "g" },
-      { "id": "s30b", "name": "Lentilles vertes", "qty": 300, "unit": "g" },
-      { "id": "s30c", "name": "Carotte", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s30d", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s30e", "name": "Tomates cerises", "qty": 250, "unit": "g" },
-      { "id": "s30f", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s30g", "name": "Vinaigre de vin", "qty": 1, "unit": "cs" }
-    ]},
-    { "id": "s31", "name": "Filets de poisson panés maison", "portions": 4, "ingredients": [
-      { "id": "s31a", "name": "Filets de colin", "qty": 600, "unit": "g" },
-      { "id": "s31b", "name": "Chapelure", "qty": 100, "unit": "g" },
-      { "id": "s31c", "name": "Œufs", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s31d", "name": "Pomme de terre", "qty": 800, "unit": "g" },
-      { "id": "s31e", "name": "Brocoli", "qty": 400, "unit": "g" },
-      { "id": "s31f", "name": "Huile d'olive", "qty": 2, "unit": "cs" }
-    ]},
-    { "id": "s32", "name": "Crevettes à l'ail & nouilles de riz", "portions": 4, "ingredients": [
-      { "id": "s32a", "name": "Crevettes", "qty": 500, "unit": "g" },
-      { "id": "s32b", "name": "Nouilles de riz", "qty": 320, "unit": "g" },
-      { "id": "s32c", "name": "Ail", "qty": 3, "unit": "gousse(s)" },
-      { "id": "s32d", "name": "Courgette", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s32e", "name": "Sauce soja", "qty": 3, "unit": "cs" },
-      { "id": "s32f", "name": "Huile d'olive", "qty": 2, "unit": "cs" }
-    ]},
-    { "id": "s33", "name": "Paella maison", "portions": 4, "ingredients": [
-      { "id": "s33a", "name": "Blanc de poulet", "qty": 400, "unit": "g" },
-      { "id": "s33b", "name": "Crevettes", "qty": 300, "unit": "g" },
-      { "id": "s33c", "name": "Riz rond", "qty": 400, "unit": "g" },
-      { "id": "s33d", "name": "Poivron rouge", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s33e", "name": "Petits pois", "qty": 200, "unit": "g" },
-      { "id": "s33f", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s33g", "name": "Safran", "qty": 1, "unit": "pincée(s)" },
-      { "id": "s33h", "name": "Huile d'olive", "qty": 3, "unit": "cs" }
-    ]},
-    { "id": "s34", "name": "Quiche brocoli & jambon", "portions": 4, "ingredients": [
-      { "id": "s34a", "name": "Pâte brisée", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s34b", "name": "Œufs", "qty": 4, "unit": "pièce(s)" },
-      { "id": "s34c", "name": "Crème fraîche", "qty": 200, "unit": "ml" },
-      { "id": "s34d", "name": "Brocoli", "qty": 300, "unit": "g" },
-      { "id": "s34e", "name": "Jambon blanc", "qty": 200, "unit": "g" },
-      { "id": "s34f", "name": "Gruyère râpé", "qty": 100, "unit": "g" }
-    ]},
-    { "id": "s35", "name": "Omelette aux champignons & salade", "portions": 4, "ingredients": [
-      { "id": "s35a", "name": "Œufs", "qty": 8, "unit": "pièce(s)" },
-      { "id": "s35b", "name": "Champignons de Paris", "qty": 400, "unit": "g" },
-      { "id": "s35c", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s35d", "name": "Salade verte", "qty": 150, "unit": "g" },
-      { "id": "s35e", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s35f", "name": "Persil frais", "qty": 10, "unit": "g" }
-    ]},
-    { "id": "s36", "name": "Bolognaise de lentilles", "portions": 4, "ingredients": [
-      { "id": "s36a", "name": "Pâtes (penne)", "qty": 400, "unit": "g" },
-      { "id": "s36b", "name": "Lentilles corail", "qty": 250, "unit": "g" },
-      { "id": "s36c", "name": "Tomates concassées", "qty": 800, "unit": "g" },
-      { "id": "s36d", "name": "Carotte", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s36e", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s36f", "name": "Ail", "qty": 2, "unit": "gousse(s)" },
-      { "id": "s36g", "name": "Basilic séché", "qty": 1, "unit": "cc" }
-    ]},
-    { "id": "s37", "name": "Salade de pâtes thon & œufs", "portions": 4, "ingredients": [
-      { "id": "s37a", "name": "Pâtes (fusilli)", "qty": 400, "unit": "g" },
-      { "id": "s37b", "name": "Thon (boîte)", "qty": 300, "unit": "g" },
-      { "id": "s37c", "name": "Maïs (boîte)", "qty": 200, "unit": "g" },
-      { "id": "s37d", "name": "Œufs", "qty": 3, "unit": "pièce(s)" },
-      { "id": "s37e", "name": "Tomates cerises", "qty": 250, "unit": "g" },
-      { "id": "s37f", "name": "Yaourt nature", "qty": 150, "unit": "g" }
-    ]},
-    { "id": "s38", "name": "Risotto champignons & petits pois", "portions": 4, "ingredients": [
-      { "id": "s38a", "name": "Riz arborio", "qty": 320, "unit": "g" },
-      { "id": "s38b", "name": "Champignons de Paris", "qty": 400, "unit": "g" },
-      { "id": "s38c", "name": "Petits pois", "qty": 300, "unit": "g" },
-      { "id": "s38d", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s38e", "name": "Parmesan", "qty": 80, "unit": "g" },
-      { "id": "s38f", "name": "Bouillon de légumes", "qty": 1, "unit": "L" }
-    ]},
-    { "id": "s39", "name": "Couscous végétarien aux pois chiches", "portions": 4, "ingredients": [
-      { "id": "s39a", "name": "Semoule", "qty": 400, "unit": "g" },
-      { "id": "s39b", "name": "Pois chiches (boîte)", "qty": 600, "unit": "g" },
-      { "id": "s39c", "name": "Courgette", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s39d", "name": "Carotte", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s39e", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s39f", "name": "Ras-el-hanout", "qty": 2, "unit": "cs" },
-      { "id": "s39g", "name": "Tomates concassées", "qty": 400, "unit": "g" }
-    ]},
-    { "id": "s40", "name": "Salade quinoa, feta & concombre", "portions": 4, "ingredients": [
-      { "id": "s40a", "name": "Quinoa", "qty": 300, "unit": "g" },
-      { "id": "s40b", "name": "Concombre", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s40c", "name": "Tomate", "qty": 3, "unit": "pièce(s)" },
-      { "id": "s40d", "name": "Feta", "qty": 200, "unit": "g" },
-      { "id": "s40e", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s40f", "name": "Citron", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s40g", "name": "Menthe fraîche", "qty": 10, "unit": "g" }
-    ]},
-    { "id": "s41", "name": "Overnight oats aux fraises", "portions": 4, "ingredients": [
-      { "id": "s41a", "name": "Flocons d'avoine", "qty": 200, "unit": "g" },
-      { "id": "s41b", "name": "Lait", "qty": 500, "unit": "ml" },
-      { "id": "s41c", "name": "Yaourt nature", "qty": 250, "unit": "g" },
-      { "id": "s41d", "name": "Fraises", "qty": 400, "unit": "g" },
-      { "id": "s41e", "name": "Miel", "qty": 2, "unit": "cs" },
-      { "id": "s41f", "name": "Graines de chia", "qty": 2, "unit": "cs" }
-    ]},
-    { "id": "s42", "name": "Pancakes protéinés banane", "portions": 4, "ingredients": [
-      { "id": "s42a", "name": "Flocons d'avoine", "qty": 200, "unit": "g" },
-      { "id": "s42b", "name": "Banane", "qty": 3, "unit": "pièce(s)" },
-      { "id": "s42c", "name": "Œufs", "qty": 4, "unit": "pièce(s)" },
-      { "id": "s42d", "name": "Fromage blanc", "qty": 250, "unit": "g" },
-      { "id": "s42e", "name": "Levure chimique", "qty": 1, "unit": "cc" },
-      { "id": "s42f", "name": "Huile d'olive", "qty": 1, "unit": "cs" }
-    ]},
-    { "id": "s43", "name": "Bowl skyr & fruits rouges", "portions": 4, "ingredients": [
-      { "id": "s43a", "name": "Skyr", "qty": 500, "unit": "g" },
-      { "id": "s43b", "name": "Fruits rouges (congelés)", "qty": 400, "unit": "g" },
-      { "id": "s43c", "name": "Granola", "qty": 120, "unit": "g" },
-      { "id": "s43d", "name": "Miel", "qty": 2, "unit": "cs" },
-      { "id": "s43e", "name": "Graines de chia", "qty": 1, "unit": "cs" }
-    ]},
-    { "id": "s44", "name": "Muffins œufs & épinards", "portions": 4, "ingredients": [
-      { "id": "s44a", "name": "Œufs", "qty": 10, "unit": "pièce(s)" },
-      { "id": "s44b", "name": "Épinards", "qty": 400, "unit": "g" },
-      { "id": "s44c", "name": "Gruyère râpé", "qty": 100, "unit": "g" },
-      { "id": "s44d", "name": "Tomates cerises", "qty": 200, "unit": "g" },
-      { "id": "s44e", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s44f", "name": "Huile d'olive", "qty": 1, "unit": "cs" }
-    ]},
-    { "id": "s45", "name": "Porridge pomme-cannelle", "portions": 4, "ingredients": [
-      { "id": "s45a", "name": "Flocons d'avoine", "qty": 200, "unit": "g" },
-      { "id": "s45b", "name": "Lait", "qty": 600, "unit": "ml" },
-      { "id": "s45c", "name": "Pomme", "qty": 3, "unit": "pièce(s)" },
-      { "id": "s45d", "name": "Cannelle", "qty": 1, "unit": "cc" },
-      { "id": "s45e", "name": "Miel", "qty": 2, "unit": "cs" },
-      { "id": "s45f", "name": "Noix", "qty": 80, "unit": "g" }
-    ]},
-    { "id": "s46", "name": "Patate douce farcie au thon", "portions": 4, "ingredients": [
-      { "id": "s46a", "name": "Patate douce", "qty": 4, "unit": "pièce(s)" },
-      { "id": "s46b", "name": "Thon (boîte)", "qty": 400, "unit": "g" },
-      { "id": "s46c", "name": "Maïs (boîte)", "qty": 200, "unit": "g" },
-      { "id": "s46d", "name": "Yaourt nature", "qty": 150, "unit": "g" },
-      { "id": "s46e", "name": "Gruyère râpé", "qty": 80, "unit": "g" }
-    ]},
-    { "id": "s47", "name": "Wraps poulet & crudités", "portions": 4, "ingredients": [
-      { "id": "s47a", "name": "Tortillas de blé", "qty": 8, "unit": "pièce(s)" },
-      { "id": "s47b", "name": "Blanc de poulet", "qty": 500, "unit": "g" },
-      { "id": "s47c", "name": "Carotte", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s47d", "name": "Concombre", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s47e", "name": "Tomate", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s47f", "name": "Yaourt nature", "qty": 200, "unit": "g" },
-      { "id": "s47g", "name": "Huile d'olive", "qty": 1, "unit": "cs" }
-    ]},
-    { "id": "s48", "name": "Salade quinoa, œuf & avocat", "portions": 4, "ingredients": [
-      { "id": "s48a", "name": "Quinoa", "qty": 300, "unit": "g" },
-      { "id": "s48b", "name": "Œufs", "qty": 4, "unit": "pièce(s)" },
-      { "id": "s48c", "name": "Avocat", "qty": 2, "unit": "pièce(s)" },
-      { "id": "s48d", "name": "Tomates cerises", "qty": 250, "unit": "g" },
-      { "id": "s48e", "name": "Concombre", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s48f", "name": "Huile d'olive", "qty": 2, "unit": "cs" },
-      { "id": "s48g", "name": "Citron", "qty": 1, "unit": "pièce(s)" }
-    ]},
-    { "id": "s49", "name": "Velouté de courgettes", "portions": 4, "ingredients": [
-      { "id": "s49a", "name": "Courgette", "qty": 1000, "unit": "g" },
-      { "id": "s49b", "name": "Fromage frais", "qty": 200, "unit": "g" },
-      { "id": "s49c", "name": "Pomme de terre", "qty": 300, "unit": "g" },
-      { "id": "s49d", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
-      { "id": "s49e", "name": "Bouillon de légumes", "qty": 1, "unit": "L" },
-      { "id": "s49f", "name": "Huile d'olive", "qty": 1, "unit": "cs" }
-    ]},
-    { "id": "s50", "name": "Energy balls avoine-cacahuète", "portions": 4, "ingredients": [
-      { "id": "s50a", "name": "Flocons d'avoine", "qty": 200, "unit": "g" },
-      { "id": "s50b", "name": "Beurre de cacahuète", "qty": 150, "unit": "g" },
-      { "id": "s50c", "name": "Dattes", "qty": 200, "unit": "g" },
-      { "id": "s50d", "name": "Cacao en poudre", "qty": 2, "unit": "cs" },
-      { "id": "s50e", "name": "Miel", "qty": 2, "unit": "cs" },
-      { "id": "s50f", "name": "Graines de chia", "qty": 1, "unit": "cs" }
-    ]}
+    {
+      "id": "m01",
+      "name": "Poulet au curry & riz",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m01i1", "name": "Blanc de poulet", "qty": 600, "unit": "g" },
+        { "id": "m01i2", "name": "Riz basmati", "qty": 320, "unit": "g" },
+        { "id": "m01i3", "name": "Lait de coco", "qty": 400, "unit": "ml" },
+        { "id": "m01i4", "name": "Oignon", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m01i5", "name": "Curry en poudre", "qty": 2, "unit": "cs" },
+        { "id": "m01i6", "name": "Gingembre frais", "qty": 30, "unit": "g" },
+        { "id": "m01i7", "name": "Coriandre fraîche", "qty": 1, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m02",
+      "name": "Chili con carne singeante",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m02i1", "name": "Bœuf haché 5%", "qty": 600, "unit": "g" },
+        { "id": "m02i2", "name": "Haricots rouges (boîte)", "qty": 400, "unit": "g" },
+        { "id": "m02i3", "name": "Tomates concassées", "qty": 800, "unit": "g" },
+        { "id": "m02i4", "name": "Oignon", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m02i5", "name": "Paprika fumé", "qty": 1, "unit": "cs" },
+        { "id": "m02i6", "name": "Cumin en poudre", "qty": 1, "unit": "cs" },
+        { "id": "m02i7", "name": "Riz basmati", "qty": 300, "unit": "g" },
+        { "id": "m02i8", "name": "Cheddar râpé", "qty": 150, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m03",
+      "name": "Pâtes à la crème de courge & sauge",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m03i1", "name": "Pâtes (penne)", "qty": 400, "unit": "g" },
+        { "id": "m03i2", "name": "Courge butternut", "qty": 800, "unit": "g" },
+        { "id": "m03i3", "name": "Crème fraîche", "qty": 200, "unit": "ml" },
+        { "id": "m03i4", "name": "Parmesan", "qty": 80, "unit": "g" },
+        { "id": "m03i5", "name": "Sauge fraîche", "qty": 10, "unit": "pièce(s)" },
+        { "id": "m03i6", "name": "Ail", "qty": 3, "unit": "gousse(s)" },
+        { "id": "m03i7", "name": "Huile d'olive", "qty": 3, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m04",
+      "name": "Curry de pois chiches aux épinards",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m04i1", "name": "Pois chiches (boîte)", "qty": 800, "unit": "g" },
+        { "id": "m04i2", "name": "Lait de coco", "qty": 400, "unit": "ml" },
+        { "id": "m04i3", "name": "Épinards frais", "qty": 400, "unit": "g" },
+        { "id": "m04i4", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m04i5", "name": "Curry en poudre", "qty": 2, "unit": "cs" },
+        { "id": "m04i6", "name": "Riz basmati", "qty": 300, "unit": "g" },
+        { "id": "m04i7", "name": "Gingembre frais", "qty": 20, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m05",
+      "name": "Bœuf bourguignon express",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m05i1", "name": "Bœuf à braiser (palleron)", "qty": 1, "unit": "kg" },
+        { "id": "m05i2", "name": "Lardons fumés", "qty": 200, "unit": "g" },
+        { "id": "m05i3", "name": "Carotte", "qty": 3, "unit": "pièce(s)" },
+        { "id": "m05i4", "name": "Oignon", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m05i5", "name": "Champignons de Paris", "qty": 400, "unit": "g" },
+        { "id": "m05i6", "name": "Vin rouge", "qty": 500, "unit": "ml" },
+        { "id": "m05i7", "name": "Bouillon de légumes", "qty": 500, "unit": "ml" },
+        { "id": "m05i8", "name": "Pommes de terre", "qty": 1, "unit": "kg" }
+      ]
+    },
+    {
+      "id": "m06",
+      "name": "Poulet jerk & ananas grillé",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m06i1", "name": "Cuisses de poulet", "qty": 8, "unit": "pièce(s)" },
+        { "id": "m06i2", "name": "Ananas frais", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m06i3", "name": "Oignon", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m06i4", "name": "Ail", "qty": 4, "unit": "gousse(s)" },
+        { "id": "m06i5", "name": "Gingembre frais", "qty": 30, "unit": "g" },
+        { "id": "m06i6", "name": "Piment frais", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m06i7", "name": "Riz basmati", "qty": 300, "unit": "g" },
+        { "id": "m06i8", "name": "Thym frais", "qty": 1, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m07",
+      "name": "Risotto aux champignons & parmesan",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m07i1", "name": "Riz arborio", "qty": 320, "unit": "g" },
+        { "id": "m07i2", "name": "Champignons de Paris", "qty": 500, "unit": "g" },
+        { "id": "m07i3", "name": "Échalote", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m07i4", "name": "Vin blanc", "qty": 150, "unit": "ml" },
+        { "id": "m07i5", "name": "Bouillon de légumes", "qty": 1, "unit": "L" },
+        { "id": "m07i6", "name": "Parmesan", "qty": 100, "unit": "g" },
+        { "id": "m07i7", "name": "Beurre", "qty": 50, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m08",
+      "name": "Tacos de bœuf chipotle",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m08i1", "name": "Bœuf haché 5%", "qty": 600, "unit": "g" },
+        { "id": "m08i2", "name": "Tortillas de maïs", "qty": 12, "unit": "pièce(s)" },
+        { "id": "m08i3", "name": "Chipotle en sauce", "qty": 2, "unit": "cs" },
+        { "id": "m08i4", "name": "Oignon rouge", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m08i5", "name": "Citron", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m08i6", "name": "Coriandre fraîche", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m08i7", "name": "Cheddar râpé", "qty": 150, "unit": "g" },
+        { "id": "m08i8", "name": "Tomates cerises", "qty": 300, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m09",
+      "name": "Soupe de lentilles corail au cumin",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m09i1", "name": "Lentilles corail", "qty": 300, "unit": "g" },
+        { "id": "m09i2", "name": "Carotte", "qty": 3, "unit": "pièce(s)" },
+        { "id": "m09i3", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m09i4", "name": "Ail", "qty": 2, "unit": "gousse(s)" },
+        { "id": "m09i5", "name": "Bouillon de légumes", "qty": 1.5, "unit": "L" },
+        { "id": "m09i6", "name": "Cumin en poudre", "qty": 1, "unit": "cs" },
+        { "id": "m09i7", "name": "Huile d'olive", "qty": 1, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m10",
+      "name": "Aubergines farcies à la bolognaise",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m10i1", "name": "Aubergine", "qty": 4, "unit": "pièce(s)" },
+        { "id": "m10i2", "name": "Bœuf haché 5%", "qty": 500, "unit": "g" },
+        { "id": "m10i3", "name": "Tomates concassées", "qty": 800, "unit": "g" },
+        { "id": "m10i4", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m10i5", "name": "Mozzarella", "qty": 250, "unit": "g" },
+        { "id": "m10i6", "name": "Ail", "qty": 2, "unit": "gousse(s)" },
+        { "id": "m10i7", "name": "Basilic frais", "qty": 1, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m11",
+      "name": "Poulet au citron & herbes, pommes de terre",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m11i1", "name": "Pommes de terre", "qty": 1, "unit": "kg" },
+        { "id": "m11i2", "name": "Cuisses de poulet", "qty": 8, "unit": "pièce(s)" },
+        { "id": "m11i3", "name": "Citron", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m11i4", "name": "Ail", "qty": 6, "unit": "gousse(s)" },
+        { "id": "m11i5", "name": "Herbes de Provence", "qty": 2, "unit": "cs" },
+        { "id": "m11i6", "name": "Huile d'olive", "qty": 4, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m12",
+      "name": "Dahl de lentilles au lait de coco",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m12i1", "name": "Lentilles vertes", "qty": 300, "unit": "g" },
+        { "id": "m12i2", "name": "Lait de coco", "qty": 400, "unit": "ml" },
+        { "id": "m12i3", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m12i4", "name": "Curry en poudre", "qty": 2, "unit": "cs" },
+        { "id": "m12i5", "name": "Épinards frais", "qty": 300, "unit": "g" },
+        { "id": "m12i6", "name": "Riz basmati", "qty": 300, "unit": "g" },
+        { "id": "m12i7", "name": "Tomates concassées", "qty": 400, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m13",
+      "name": "Lasagnes aux légumes rôtis",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m13i1", "name": "Feuilles de lasagne", "qty": 12, "unit": "pièce(s)" },
+        { "id": "m13i2", "name": "Courgette", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m13i3", "name": "Poivron rouge", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m13i4", "name": "Tomates concassées", "qty": 800, "unit": "g" },
+        { "id": "m13i5", "name": "Crème fraîche", "qty": 400, "unit": "ml" },
+        { "id": "m13i6", "name": "Mozzarella", "qty": 250, "unit": "g" },
+        { "id": "m13i7", "name": "Parmesan", "qty": 80, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m14",
+      "name": "Poulet teriyaki, riz vinaigré & edamame",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m14i1", "name": "Blanc de poulet", "qty": 600, "unit": "g" },
+        { "id": "m14i2", "name": "Riz basmati", "qty": 320, "unit": "g" },
+        { "id": "m14i3", "name": "Edamame (surgelés)", "qty": 400, "unit": "g" },
+        { "id": "m14i4", "name": "Sauce soja", "qty": 4, "unit": "cs" },
+        { "id": "m14i5", "name": "Miel", "qty": 2, "unit": "cs" },
+        { "id": "m14i6", "name": "Vinaigre de riz", "qty": 2, "unit": "cs" },
+        { "id": "m14i7", "name": "Graines de sésame", "qty": 1, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m15",
+      "name": "Gratin dauphinois",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m15i1", "name": "Pommes de terre", "qty": 1.2, "unit": "kg" },
+        { "id": "m15i2", "name": "Crème fraîche", "qty": 500, "unit": "ml" },
+        { "id": "m15i3", "name": "Lait demi-écrémé", "qty": 300, "unit": "ml" },
+        { "id": "m15i4", "name": "Ail", "qty": 2, "unit": "gousse(s)" },
+        { "id": "m15i5", "name": "Gruyère râpé", "qty": 150, "unit": "g" },
+        { "id": "m15i6", "name": "Noix de muscade", "qty": 1, "unit": "pincée(s)" }
+      ]
+    },
+    {
+      "id": "m16",
+      "name": "Buddha bowl patate douce, houmous & pois chiches",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m16i1", "name": "Patate douce", "qty": 1, "unit": "kg" },
+        { "id": "m16i2", "name": "Pois chiches (boîte)", "qty": 400, "unit": "g" },
+        { "id": "m16i3", "name": "Houmous", "qty": 300, "unit": "g" },
+        { "id": "m16i4", "name": "Quinoa", "qty": 250, "unit": "g" },
+        { "id": "m16i5", "name": "Concombre", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m16i6", "name": "Tomates cerises", "qty": 300, "unit": "g" },
+        { "id": "m16i7", "name": "Citron", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m16i8", "name": "Huile d'olive", "qty": 3, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m17",
+      "name": "Bœuf sauté aux nouilles & brocoli",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m17i1", "name": "Bœuf à stir-fry", "qty": 600, "unit": "g" },
+        { "id": "m17i2", "name": "Nouilles de riz", "qty": 300, "unit": "g" },
+        { "id": "m17i3", "name": "Brocoli", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m17i4", "name": "Sauce soja", "qty": 5, "unit": "cs" },
+        { "id": "m17i5", "name": "Gingembre frais", "qty": 25, "unit": "g" },
+        { "id": "m17i6", "name": "Ail", "qty": 3, "unit": "gousse(s)" },
+        { "id": "m17i7", "name": "Sriracha", "qty": 1, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m18",
+      "name": "Couscous royal aux légumes & merguez",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m18i1", "name": "Semoule", "qty": 400, "unit": "g" },
+        { "id": "m18i2", "name": "Merguez", "qty": 8, "unit": "pièce(s)" },
+        { "id": "m18i3", "name": "Carotte", "qty": 3, "unit": "pièce(s)" },
+        { "id": "m18i4", "name": "Courgette", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m18i5", "name": "Pois chiches (boîte)", "qty": 400, "unit": "g" },
+        { "id": "m18i6", "name": "Tomates concassées", "qty": 400, "unit": "g" },
+        { "id": "m18i7", "name": "Ras-el-hanout", "qty": 2, "unit": "cs" },
+        { "id": "m18i8", "name": "Bouillon de légumes", "qty": 1, "unit": "L" }
+      ]
+    },
+    {
+      "id": "m19",
+      "name": "Pâtes à la puttanesca",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m19i1", "name": "Spaghetti", "qty": 400, "unit": "g" },
+        { "id": "m19i2", "name": "Tomates concassées", "qty": 800, "unit": "g" },
+        { "id": "m19i3", "name": "Anchois à l'huile", "qty": 8, "unit": "pièce(s)" },
+        { "id": "m19i4", "name": "Olives noires", "qty": 150, "unit": "g" },
+        { "id": "m19i5", "name": "Câpres", "qty": 2, "unit": "cs" },
+        { "id": "m19i6", "name": "Ail", "qty": 3, "unit": "gousse(s)" },
+        { "id": "m19i7", "name": "Huile d'olive", "qty": 3, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m20",
+      "name": "Poulet yassa (oignons citronnés)",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m20i1", "name": "Cuisses de poulet", "qty": 8, "unit": "pièce(s)" },
+        { "id": "m20i2", "name": "Oignon", "qty": 6, "unit": "pièce(s)" },
+        { "id": "m20i3", "name": "Citron", "qty": 3, "unit": "pièce(s)" },
+        { "id": "m20i4", "name": "Moutarde", "qty": 3, "unit": "cs" },
+        { "id": "m20i5", "name": "Riz basmati", "qty": 300, "unit": "g" },
+        { "id": "m20i6", "name": "Huile d'olive", "qty": 3, "unit": "cs" },
+        { "id": "m20i7", "name": "Bouillon de légumes", "qty": 300, "unit": "ml" }
+      ]
+    },
+    {
+      "id": "m21",
+      "name": "Chili sin carne (végé)",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m21i1", "name": "Haricots rouges (boîte)", "qty": 400, "unit": "g" },
+        { "id": "m21i2", "name": "Maïs (boîte)", "qty": 300, "unit": "g" },
+        { "id": "m21i3", "name": "Tomates concassées", "qty": 800, "unit": "g" },
+        { "id": "m21i4", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m21i5", "name": "Poivron rouge", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m21i6", "name": "Riz basmati", "qty": 300, "unit": "g" },
+        { "id": "m21i7", "name": "Paprika fumé", "qty": 1, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m22",
+      "name": "Katsu curry de poulet",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m22i1", "name": "Escalopes de poulet", "qty": 4, "unit": "pièce(s)" },
+        { "id": "m22i2", "name": "Chapelure panko", "qty": 200, "unit": "g" },
+        { "id": "m22i3", "name": "Œufs", "qty": 3, "unit": "pièce(s)" },
+        { "id": "m22i4", "name": "Farine", "qty": 100, "unit": "g" },
+        { "id": "m22i5", "name": "Curry en poudre", "qty": 3, "unit": "cs" },
+        { "id": "m22i6", "name": "Riz basmati", "qty": 320, "unit": "g" },
+        { "id": "m22i7", "name": "Oignon", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m22i8", "name": "Pomme", "qty": 1, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m23",
+      "name": " Shakshuka aux poivrons",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m23i1", "name": "Œufs", "qty": 8, "unit": "pièce(s)" },
+        { "id": "m23i2", "name": "Tomates concassées", "qty": 800, "unit": "g" },
+        { "id": "m23i3", "name": "Poivron rouge", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m23i4", "name": "Oignon", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m23i5", "name": "Ail", "qty": 3, "unit": "gousse(s)" },
+        { "id": "m23i6", "name": "Cumin en poudre", "qty": 1, "unit": "cs" },
+        { "id": "m23i7", "name": "Feta", "qty": 150, "unit": "g" },
+        { "id": "m23i8", "name": "Pain pita", "qty": 4, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m24",
+      "name": "Poulet rôti harissa & légumes racines",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m24i1", "name": "Poulet entier", "qty": 1, "unit": "kg" },
+        { "id": "m24i2", "name": "Harissa", "qty": 3, "unit": "cs" },
+        { "id": "m24i3", "name": "Patate douce", "qty": 600, "unit": "g" },
+        { "id": "m24i4", "name": "Carotte", "qty": 4, "unit": "pièce(s)" },
+        { "id": "m24i5", "name": "Oignon", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m24i6", "name": "Citron", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m24i7", "name": "Huile d'olive", "qty": 3, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m25",
+      "name": "Bibimbap de bœuf & légumes",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m25i1", "name": "Bœuf à stir-fry", "qty": 500, "unit": "g" },
+        { "id": "m25i2", "name": "Riz basmati", "qty": 320, "unit": "g" },
+        { "id": "m25i3", "name": "Carotte", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m25i4", "name": "Épinards frais", "qty": 300, "unit": "g" },
+        { "id": "m25i5", "name": "Champignons de Paris", "qty": 300, "unit": "g" },
+        { "id": "m25i6", "name": "Œufs", "qty": 4, "unit": "pièce(s)" },
+        { "id": "m25i7", "name": "Sauce soja", "qty": 4, "unit": "cs" },
+        { "id": "m25i8", "name": "Gochujang", "qty": 2, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m26",
+      "name": "Tarte fine courgette-menthe-chèvre",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m26i1", "name": "Pâte feuilletée", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m26i2", "name": "Courgette", "qty": 3, "unit": "pièce(s)" },
+        { "id": "m26i3", "name": "Chèvre frais", "qty": 200, "unit": "g" },
+        { "id": "m26i4", "name": "Menthe fraîche", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m26i5", "name": "Miel", "qty": 1, "unit": "cs" },
+        { "id": "m26i6", "name": "Huile d'olive", "qty": 2, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m27",
+      "name": "Pâtes à la carbonara crémeuse",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m27i1", "name": "Spaghetti", "qty": 400, "unit": "g" },
+        { "id": "m27i2", "name": "Lardons fumés", "qty": 250, "unit": "g" },
+        { "id": "m27i3", "name": "Œufs", "qty": 4, "unit": "pièce(s)" },
+        { "id": "m27i4", "name": "Parmesan", "qty": 100, "unit": "g" },
+        { "id": "m27i5", "name": "Ail", "qty": 1, "unit": "gousse(s)" },
+        { "id": "m27i6", "name": "Poivre noir", "qty": 1, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m28",
+      "name": "Salade de lentilles, feta & betteraves",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m28i1", "name": "Lentilles vertes", "qty": 300, "unit": "g" },
+        { "id": "m28i2", "name": "Betterave cuite", "qty": 400, "unit": "g" },
+        { "id": "m28i3", "name": "Feta", "qty": 200, "unit": "g" },
+        { "id": "m28i4", "name": "Oignon rouge", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m28i5", "name": "Menthe fraîche", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m28i6", "name": "Huile d'olive", "qty": 4, "unit": "cs" },
+        { "id": "m28i7", "name": "Citron", "qty": 1, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m29",
+      "name": "Bœuf satay & nouilles de riz",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m29i1", "name": "Bœuf à stir-fry", "qty": 600, "unit": "g" },
+        { "id": "m29i2", "name": "Nouilles de riz", "qty": 300, "unit": "g" },
+        { "id": "m29i3", "name": "Beurre de cacahuète", "qty": 4, "unit": "cs" },
+        { "id": "m29i4", "name": "Lait de coco", "qty": 200, "unit": "ml" },
+        { "id": "m29i5", "name": "Sauce soja", "qty": 3, "unit": "cs" },
+        { "id": "m29i6", "name": "Citron vert", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m29i7", "name": "Carotte", "qty": 2, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m30",
+      "name": "Gratin de pâtes au thon & olives",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m30i1", "name": "Pâtes (penne)", "qty": 400, "unit": "g" },
+        { "id": "m30i2", "name": "Thon (boîte)", "qty": 300, "unit": "g" },
+        { "id": "m30i3", "name": "Crème fraîche", "qty": 400, "unit": "ml" },
+        { "id": "m30i4", "name": "Gruyère râpé", "qty": 200, "unit": "g" },
+        { "id": "m30i5", "name": "Olives noires", "qty": 100, "unit": "g" },
+        { "id": "m30i6", "name": "Tomates concassées", "qty": 400, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m31",
+      "name": "Poulet cordon bleu maison, purée",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m31i1", "name": "Escalopes de poulet", "qty": 4, "unit": "pièce(s)" },
+        { "id": "m31i2", "name": "Jambon blanc", "qty": 4, "unit": "pièce(s)" },
+        { "id": "m31i3", "name": "Gruyère râpé", "qty": 150, "unit": "g" },
+        { "id": "m31i4", "name": "Chapelure panko", "qty": 150, "unit": "g" },
+        { "id": "m31i5", "name": "Pommes de terre", "qty": 1, "unit": "kg" },
+        { "id": "m31i6", "name": "Lait demi-écrémé", "qty": 200, "unit": "ml" },
+        { "id": "m31i7", "name": "Beurre", "qty": 50, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m32",
+      "name": "Chana masala (curry de pois chiches sec)",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m32i1", "name": "Pois chiches (boîte)", "qty": 800, "unit": "g" },
+        { "id": "m32i2", "name": "Tomates concassées", "qty": 400, "unit": "g" },
+        { "id": "m32i3", "name": "Oignon", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m32i4", "name": "Gingembre frais", "qty": 25, "unit": "g" },
+        { "id": "m32i5", "name": "Curry en poudre", "qty": 2, "unit": "cs" },
+        { "id": "m32i6", "name": "Garam masala", "qty": 1, "unit": "cs" },
+        { "id": "m32i7", "name": "Riz basmati", "qty": 300, "unit": "g" },
+        { "id": "m32i8", "name": "Coriandre fraîche", "qty": 1, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m33",
+      "name": "Poisson en papillote, légumes au citron",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m33i1", "name": "Filet de cabillaud", "qty": 600, "unit": "g" },
+        { "id": "m33i2", "name": "Courgette", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m33i3", "name": "Tomates cerises", "qty": 300, "unit": "g" },
+        { "id": "m33i4", "name": "Citron", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m33i5", "name": "Huile d'olive", "qty": 3, "unit": "cs" },
+        { "id": "m33i6", "name": "Pommes de terre", "qty": 600, "unit": "g" },
+        { "id": "m33i7", "name": "Thym frais", "qty": 1, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m34",
+      "name": "Enchiladas au poulet",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m34i1", "name": "Tortillas de maïs", "qty": 8, "unit": "pièce(s)" },
+        { "id": "m34i2", "name": "Blanc de poulet", "qty": 500, "unit": "g" },
+        { "id": "m34i3", "name": "Tomates concassées", "qty": 800, "unit": "g" },
+        { "id": "m34i4", "name": "Haricots rouges (boîte)", "qty": 400, "unit": "g" },
+        { "id": "m34i5", "name": "Cheddar râpé", "qty": 200, "unit": "g" },
+        { "id": "m34i6", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m34i7", "name": "Paprika fumé", "qty": 1, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m35",
+      "name": "Salade César poulet croustillant",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m35i1", "name": "Escalopes de poulet", "qty": 4, "unit": "pièce(s)" },
+        { "id": "m35i2", "name": "Salade romaine", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m35i3", "name": "Parmesan", "qty": 80, "unit": "g" },
+        { "id": "m35i4", "name": "Pain de campagne", "qty": 200, "unit": "g" },
+        { "id": "m35i5", "name": "Œufs", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m35i6", "name": "Moutarde", "qty": 1, "unit": "cs" },
+        { "id": "m35i7", "name": "Anchois à l'huile", "qty": 4, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m36",
+      "name": "Curry thaï crevettes & nouilles de riz",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m36i1", "name": "Crevettes décortiquées", "qty": 500, "unit": "g" },
+        { "id": "m36i2", "name": "Nouilles de riz", "qty": 300, "unit": "g" },
+        { "id": "m36i3", "name": "Lait de coco", "qty": 400, "unit": "ml" },
+        { "id": "m36i4", "name": "Pâte de curry rouge", "qty": 2, "unit": "cs" },
+        { "id": "m36i5", "name": "Poivron rouge", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m36i6", "name": "Citron vert", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m36i7", "name": "Coriandre fraîche", "qty": 1, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m37",
+      "name": "Pomme de terre farcie chilli & fromage",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m37i1", "name": "Pommes de terre", "qty": 8, "unit": "pièce(s)" },
+        { "id": "m37i2", "name": "Bœuf haché 5%", "qty": 400, "unit": "g" },
+        { "id": "m37i3", "name": "Haricots rouges (boîte)", "qty": 400, "unit": "g" },
+        { "id": "m37i4", "name": "Tomates concassées", "qty": 400, "unit": "g" },
+        { "id": "m37i5", "name": "Cheddar râpé", "qty": 250, "unit": "g" },
+        { "id": "m37i6", "name": "Crème fraîche", "qty": 150, "unit": "ml" },
+        { "id": "m37i7", "name": "Cumin en poudre", "qty": 1, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m38",
+      "name": "Riz sauté poulet & légumes (fried rice)",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m38i1", "name": "Riz basmati", "qty": 350, "unit": "g" },
+        { "id": "m38i2", "name": "Blanc de poulet", "qty": 500, "unit": "g" },
+        { "id": "m38i3", "name": "Œufs", "qty": 3, "unit": "pièce(s)" },
+        { "id": "m38i4", "name": "Petits pois surgelés", "qty": 300, "unit": "g" },
+        { "id": "m38i5", "name": "Carotte", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m38i6", "name": "Sauce soja", "qty": 5, "unit": "cs" },
+        { "id": "m38i7", "name": "Gingembre frais", "qty": 20, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m39",
+      "name": "Velouté de patate douce & lait de coco",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m39i1", "name": "Patate douce", "qty": 1, "unit": "kg" },
+        { "id": "m39i2", "name": "Lait de coco", "qty": 400, "unit": "ml" },
+        { "id": "m39i3", "name": "Bouillon de légumes", "qty": 1, "unit": "L" },
+        { "id": "m39i4", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m39i5", "name": "Gingembre frais", "qty": 20, "unit": "g" },
+        { "id": "m39i6", "name": "Huile d'olive", "qty": 1, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m40",
+      "name": "Burger maison bœuf-cheddar & patates douces frites",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m40i1", "name": "Bœuf haché 5%", "qty": 600, "unit": "g" },
+        { "id": "m40i2", "name": "Buns burger", "qty": 4, "unit": "pièce(s)" },
+        { "id": "m40i3", "name": "Cheddar râpé", "qty": 200, "unit": "g" },
+        { "id": "m40i4", "name": "Patate douce", "qty": 800, "unit": "g" },
+        { "id": "m40i5", "name": "Oignon rouge", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m40i6", "name": "Cornichons", "qty": 6, "unit": "pièce(s)" },
+        { "id": "m40i7", "name": "Moutarde", "qty": 2, "unit": "cs" }
+      ]
+    },
+    {
+      "id": "m41",
+      "name": "Moussaka de courgettes",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m41i1", "name": "Bœuf haché 5%", "qty": 500, "unit": "g" },
+        { "id": "m41i2", "name": "Aubergine", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m41i3", "name": "Courgette", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m41i4", "name": "Tomates concassées", "qty": 800, "unit": "g" },
+        { "id": "m41i5", "name": "Lait demi-écrémé", "qty": 400, "unit": "ml" },
+        { "id": "m41i6", "name": "Farine", "qty": 50, "unit": "g" },
+        { "id": "m41i7", "name": "Beurre", "qty": 50, "unit": "g" },
+        { "id": "m41i8", "name": "Cannelle", "qty": 1, "unit": "pincée(s)" }
+      ]
+    },
+    {
+      "id": "m42",
+      "name": "Poulet à l'estragon & champignons",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m42i1", "name": "Cuisses de poulet", "qty": 8, "unit": "pièce(s)" },
+        { "id": "m42i2", "name": "Champignons de Paris", "qty": 500, "unit": "g" },
+        { "id": "m42i3", "name": "Échalote", "qty": 3, "unit": "pièce(s)" },
+        { "id": "m42i4", "name": "Vin blanc", "qty": 200, "unit": "ml" },
+        { "id": "m42i5", "name": "Crème fraîche", "qty": 200, "unit": "ml" },
+        { "id": "m42i6", "name": "Estragon frais", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m42i7", "name": "Riz basmati", "qty": 300, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m43",
+      "name": "Falafels maison, sauce sésame & pita",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m43i1", "name": "Pois chiches secs", "qty": 500, "unit": "g" },
+        { "id": "m43i2", "name": "Pain pita", "qty": 4, "unit": "pièce(s)" },
+        { "id": "m43i3", "name": "Persil frais", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m43i4", "name": "Ail", "qty": 3, "unit": "gousse(s)" },
+        { "id": "m43i5", "name": "Cumin en poudre", "qty": 2, "unit": "cs" },
+        { "id": "m43i6", "name": "Tahini (purée de sésame)", "qty": 4, "unit": "cs" },
+        { "id": "m43i7", "name": "Citron", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m43i8", "name": "Tomates cerises", "qty": 300, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m44",
+      "name": "Ragoût de saucisse & lentilles",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m44i1", "name": "Saucisses de Toulouse", "qty": 8, "unit": "pièce(s)" },
+        { "id": "m44i2", "name": "Lentilles vertes", "qty": 300, "unit": "g" },
+        { "id": "m44i3", "name": "Carotte", "qty": 3, "unit": "pièce(s)" },
+        { "id": "m44i4", "name": "Oignon", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m44i5", "name": "Tomates concassées", "qty": 400, "unit": "g" },
+        { "id": "m44i6", "name": "Bouillon de légumes", "qty": 1, "unit": "L" },
+        { "id": "m44i7", "name": "Thym frais", "qty": 1, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m45",
+      "name": "Nouilles soba au sésame & brocoli",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m45i1", "name": "Nouilles soba", "qty": 320, "unit": "g" },
+        { "id": "m45i2", "name": "Brocoli", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m45i3", "name": "Sauce soja", "qty": 4, "unit": "cs" },
+        { "id": "m45i4", "name": "Graines de sésame", "qty": 3, "unit": "cs" },
+        { "id": "m45i5", "name": "Huile de sésame", "qty": 2, "unit": "cs" },
+        { "id": "m45i6", "name": "Miel", "qty": 1, "unit": "cs" },
+        { "id": "m45i7", "name": "Ail", "qty": 2, "unit": "gousse(s)" },
+        { "id": "m45i8", "name": "Tofu ferme", "qty": 400, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m46",
+      "name": "Cassoulet express",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m46i1", "name": "Haricots blancs (boîte)", "qty": 800, "unit": "g" },
+        { "id": "m46i2", "name": "Saucisses de Toulouse", "qty": 4, "unit": "pièce(s)" },
+        { "id": "m46i3", "name": "Lardons fumés", "qty": 200, "unit": "g" },
+        { "id": "m46i4", "name": "Tomates concassées", "qty": 400, "unit": "g" },
+        { "id": "m46i5", "name": "Oignon", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m46i6", "name": "Bouillon de légumes", "qty": 500, "unit": "ml" },
+        { "id": "m46i7", "name": "Chapelure panko", "qty": 50, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m47",
+      "name": "Pâtes pistache-basilic & burrata",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m47i1", "name": "Pâtes (penne)", "qty": 400, "unit": "g" },
+        { "id": "m47i2", "name": "Pistaches décortiquées", "qty": 100, "unit": "g" },
+        { "id": "m47i3", "name": "Basilic frais", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m47i4", "name": "Burrata", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m47i5", "name": "Parmesan", "qty": 60, "unit": "g" },
+        { "id": "m47i6", "name": "Ail", "qty": 1, "unit": "gousse(s)" },
+        { "id": "m47i7", "name": "Huile d'olive", "qty": 5, "unit": "cs" },
+        { "id": "m47i8", "name": "Citron", "qty": 1, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m48",
+      "name": "Gnocchis poêlés champignons & sauge",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m48i1", "name": "Gnocchis", "qty": 800, "unit": "g" },
+        { "id": "m48i2", "name": "Champignons de Paris", "qty": 500, "unit": "g" },
+        { "id": "m48i3", "name": "Sauge fraîche", "qty": 12, "unit": "pièce(s)" },
+        { "id": "m48i4", "name": "Beurre", "qty": 60, "unit": "g" },
+        { "id": "m48i5", "name": "Parmesan", "qty": 80, "unit": "g" },
+        { "id": "m48i6", "name": "Échalote", "qty": 2, "unit": "pièce(s)" }
+      ]
+    },
+    {
+      "id": "m49",
+      "name": "Poulet coco-cacahuètes (afritada style)",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m49i1", "name": "Cuisses de poulet", "qty": 8, "unit": "pièce(s)" },
+        { "id": "m49i2", "name": "Lait de coco", "qty": 400, "unit": "ml" },
+        { "id": "m49i3", "name": "Beurre de cacahuète", "qty": 3, "unit": "cs" },
+        { "id": "m49i4", "name": "Tomates concassées", "qty": 400, "unit": "g" },
+        { "id": "m49i5", "name": "Poivron rouge", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m49i6", "name": "Oignon", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m49i7", "name": "Riz basmati", "qty": 300, "unit": "g" }
+      ]
+    },
+    {
+      "id": "m50",
+      "name": "Panzanella tomates, pain & burrata",
+      "portions": 4,
+      "ingredients": [
+        { "id": "m50i1", "name": "Tomates cerises", "qty": 800, "unit": "g" },
+        { "id": "m50i2", "name": "Pain de campagne", "qty": 300, "unit": "g" },
+        { "id": "m50i3", "name": "Burrata", "qty": 2, "unit": "pièce(s)" },
+        { "id": "m50i4", "name": "Basilic frais", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m50i5", "name": "Oignon rouge", "qty": 1, "unit": "pièce(s)" },
+        { "id": "m50i6", "name": "Huile d'olive", "qty": 5, "unit": "cs" },
+        { "id": "m50i7", "name": "Vinaigre balsamique", "qty": 2, "unit": "cs" }
+      ]
+    }
   ],
   "selections": {},
   "owned": {},
