@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Batch Cooking — Recettes &amp; Liste de courses</title>
+    <style>
+      :root {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        color: #1e293b;
+        background: #f1f5f9;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #f1f5f9; }
+      .wrap { max-width: 780px; margin: 0 auto; padding: 16px; }
+      header h1 { font-size: 1.5rem; margin: 8px 0 2px; color: #0f172a; }
+      header p { font-size: 0.85rem; color: #64748b; margin: 0 0 16px; }
+      nav {
+        display: flex; gap: 6px; background: #fff; padding: 6px;
+        border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        margin-bottom: 20px; flex-wrap: wrap;
+      }
+      nav button {
+        flex: 1; min-width: 130px; border: 0; border-radius: 8px; padding: 9px 12px;
+        font-size: 0.85rem; font-weight: 600; color: #64748b; background: transparent;
+        cursor: pointer; white-space: nowrap;
+      }
+      nav button:hover { background: #f1f5f9; }
+      nav button.active { background: #059669; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+
+      .card {
+        background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+        padding: 14px; margin-bottom: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      }
+      .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+      .grow { flex: 1; min-width: 140px; }
+      input[type="text"], input[type="number"], select {
+        border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 10px;
+        font-size: 0.9rem; font-family: inherit; background: #fff; color: #1e293b;
+      }
+      input[type="text"]:focus, input[type="number"]:focus, select:focus {
+        outline: none; border-color: #059669;
+      }
+      input[type="number"] { width: 76px; text-align: right; }
+      table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 10px; }
+      td { padding: 4px 4px; border-bottom: 1px solid #f1f5f9; }
+      tr:last-child td { border-bottom: 0; }
+      td input[type="text"], td input[type="number"] { border-color: transparent; width: 100%; }
+      td input:focus { border-color: #059669; background: #f8fafc; }
+      td input[type="number"] { width: 70px; }
+
+      .btn {
+        border: 0; border-radius: 8px; padding: 9px 14px; font-size: 0.85rem;
+        font-weight: 600; cursor: pointer; font-family: inherit;
+      }
+      .btn-primary { background: #059669; color: #fff; }
+      .btn-primary:hover { background: #047857; }
+      .btn-soft { background: #f1f5f9; color: #475569; }
+      .btn-soft:hover { background: #e2e8f0; }
+      .btn-ghost { background: transparent; color: #94a3b8; padding: 6px 8px; }
+      .btn-ghost:hover { background: #fff1f2; color: #e11d48; }
+      .btn-amber { background: #fff; border: 1px solid #e2e8f0; color: #64748b; font-size: 0.75rem; padding: 5px 9px; }
+      .btn-amber:hover { border-color: #fcd34d; background: #fffbeb; color: #b45309; }
+
+      .hint { font-size: 0.85rem; color: #64748b; margin: 0 0 14px; }
+      .sel-item { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; border-radius: 12px;
+        border: 1px solid #e2e8f0; background: #fff; padding: 14px; margin-bottom: 10px; transition: all .15s; }
+      .sel-item.on { border-color: #6ee7b7; background: #ecfdf5; }
+      .sel-item label { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+      .sel-item .meta { font-size: 0.72rem; color: #64748b; }
+      .checkbox { width: 18px; height: 18px; accent-color: #059669; cursor: pointer; }
+      .summary { background: #1e293b; color: #fff; border-radius: 12px; padding: 12px;
+        text-align: center; font-size: 0.85rem; font-weight: 500; }
+
+      .shop-item { display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+        border: 1px solid #e2e8f0; background: #fff; border-radius: 12px; padding: 12px; margin-bottom: 8px; }
+      .shop-item label { display: flex; flex: 1; min-width: 160px; align-items: center; gap: 10px; cursor: pointer; }
+      .shop-item.done { background: #f8fafc; }
+      .shop-item.done .iname { color: #94a3b8; text-decoration: line-through; }
+      .qty { font-weight: 700; color: #047857; white-space: nowrap; }
+      .badge { background: #fef3c7; color: #b45309; border-radius: 99px; font-size: 0.68rem;
+        padding: 2px 8px; font-weight: 600; white-space: nowrap; }
+      .bar-wrap { background: #1e293b; color: #fff; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+      .bar { height: 8px; background: #475569; border-radius: 99px; margin-top: 8px; overflow: hidden; }
+      .bar > div { height: 100%; background: #34d399; border-radius: 99px; transition: width .2s; }
+      .owned-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 14px; }
+      .owned-box summary { cursor: pointer; font-weight: 600; color: #b45309; font-size: 0.9rem; }
+      .owned-item { display: flex; gap: 8px; font-size: 0.82rem; padding: 4px 0; align-items: center; }
+      .owned-item span { flex: 1; color: #64748b; text-decoration: line-through; }
+      .owned-item button { border: 0; background: none; color: #b45309; font-size: 0.72rem;
+        cursor: pointer; text-decoration: underline; font-family: inherit; }
+      .empty { text-align: center; border: 2px dashed #e2e8f0; border-radius: 12px;
+        background: #f8fafc; padding: 40px 20px; color: #64748b; font-size: 0.9rem; }
+      .empty .icon { font-size: 2rem; display: block; margin-bottom: 8px; }
+      footer { text-align: center; font-size: 0.72rem; color: #94a3b8; margin: 30px 0 10px; }
+      .danger-note { font-size: 0.72rem; color: #94a3b8; margin-top: 18px; text-align: center; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap" id="app"></div>
+    <script>
+      // ---------- État ----------
+      var KEY = "batch-cooking-standalone-v1";
+      var UNITS = ["g", "kg", "ml", "cl", "L", "pièce(s)", "cs", "cc", "pincée(s)", "gousse(s)"];
+      var uid = function () { return Math.random().toString(36).slice(2, 10); };
+
+      var SAMPLE = {
+        recipes: [
+          { id: "r1", name: "Poulet au curry & riz", portions: 4, ingredients: [
+            { id: "i1", name: "Blanc de poulet", qty: 600, unit: "g" },
+            { id: "i2", name: "Riz basmati", qty: 320, unit: "g" },
+            { id: "i3", name: "Lait de coco", qty: 400, unit: "ml" },
+            { id: "i4", name: "Oignon", qty: 2, unit: "pièce(s)" },
+            { id: "i5", name: "Curry en poudre", qty: 2, unit: "cs" },
+            { id: "i6", name: "Poivron rouge", qty: 2, unit: "pièce(s)" }
+          ]},
+          { id: "r2", name: "Chili sin carne", portions: 4, ingredients: [
+            { id: "i7", name: "Haricots rouges (boîte)", qty: 400, unit: "g" },
+            { id: "i8", name: "Maïs (boîte)", qty: 300, unit: "g" },
+            { id: "i9", name: "Tomates concassées", qty: 800, unit: "g" },
+            { id: "i10", name: "Oignon", qty: 1, unit: "pièce(s)" },
+            { id: "i11", name: "Poivron rouge", qty: 1, unit: "pièce(s)" },
+            { id: "i12", name: "Riz basmati", qty: 300, unit: "g" },
+            { id: "i13", name: "Paprika fumé", qty: 1, unit: "cs" }
+          ]},
+          { id: "r3", name: "Gratin de pâtes au thon", portions: 4, ingredients: [
+            { id: "i14", name: "Pâtes (penne)", qty: 400, unit: "g" },
+            { id: "i15", name: "Thon (boîte)", qty: 300, unit: "g" },
+            { id: "i16", name: "Crème fraîche", qty: 400, unit: "ml" },
+            { id: "i17", name: "Gruyère râpé", qty: 200, unit: "g" },
+            { id: "i18", name: "Tomates concassées", qty: 400, unit: "g" }
+          ]}
+        ],
+        selections: { r1: 4, r3: 4 },
+        owned: {},
+        bought: {}
+      };
+
+      var storageOK = true;
+      function load() {
+        try {
+          var raw = localStorage.getItem(KEY);
+          if (!raw) return JSON.parse(JSON.stringify(SAMPLE));
+          var parsed = JSON.parse(raw);
+          if (!parsed || !Array.isArray(parsed.recipes)) return JSON.parse(JSON.stringify(SAMPLE));
+          parsed.owned = parsed.owned || {};
+          parsed.bought = parsed.bought || {};
+          parsed.selections = parsed.selections || {};
+          return parsed;
+        } catch (e) {
+          storageOK = false;
+          return JSON.parse(JSON.stringify(SAMPLE));
+        }
+      }
+      function save() {
+        if (!storageOK) return;
+        try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { storageOK = false; }
+      }
+
+      var state = load();
+      var tab = "recipes";
+
+      // ---------- Helpers ----------
+      function esc(s) {
+        return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      }
+      function normName(s) { return String(s).trim().toLowerCase(); }
+      function toBase(qty, unit) {
+        if (unit === "kg") return { qty: qty * 1000, unit: "g" };
+        if (unit === "L") return { qty: qty * 1000, unit: "ml" };
+        if (unit === "cl") return { qty: qty * 10, unit: "ml" };
+        return { qty: qty, unit: unit };
+      }
+      function fmtQty(qty, unit) {
+        var r = Math.round(qty * 100) / 100;
+        if (unit === "g" && r >= 1000) return (Math.round(r / 10) / 100) + " kg";
+        if (unit === "ml" && r >= 1000) return (Math.round(r / 10) / 100) + " L";
+        return r + " " + unit;
+      }
+      function parseQty(v) {
+        var n = parseFloat(String(v).replace(",", "."));
+        return isFinite(n) ? n : 0;
+      }
+      function keyOf(name, unit) { return normName(name) + "|" + unit; }
+      function findRecipe(id) {
+        for (var i = 0; i < state.recipes.length; i++) if (state.recipes[i].id === id) return state.recipes[i];
+        return null;
+      }
+
+      function aggregate() {
+        var map = {};
+        var order = [];
+        state.recipes.forEach(function (r) {
+          var portions = state.selections[r.id];
+          if (portions == null) return;
+          var factor = portions / (r.portions || 1);
+          r.ingredients.forEach(function (ing) {
+            var qty = parseQty(ing.qty);
+            var name = String(ing.name || "").trim();
+            if (!name || qty <= 0) return;
+            var b = toBase(qty * factor, ing.unit);
+            var k = keyOf(name, b.unit);
+            if (!map[k]) { map[k] = { name: name, unit: b.unit, qty: 0, count: 0 }; order.push(k); }
+            map[k].qty += b.qty;
+            map[k].count++;
+          });
+        });
+        return order.map(function (k) { return map[k]; })
+          .sort(function (a, b) { return a.name.localeCompare(b.name, "fr"); });
+      }
+
+      // ---------- Actions ----------
+      function switchTab(t) { tab = t; render(); }
+      function addRecipe() {
+        state.recipes.push({ id: uid(), name: "Nouvelle recette", portions: 4, ingredients: [] });
+        save(); render();
+      }
+      function updateRecipeField(id, field, value) {
+        var r = findRecipe(id); if (!r) return;
+        if (field === "portions") r.portions = Math.max(1, parseInt(value) || 1);
+        else r[field] = value;
+        save();
+      }
+      function deleteRecipe(id) {
+        state.recipes = state.recipes.filter(function (r) { return r.id !== id; });
+        delete state.selections[id];
+        save(); render();
+      }
+      function updateIngredient(rid, iid, field, value) {
+        var r = findRecipe(rid); if (!r) return;
+        r.ingredients.forEach(function (ing) {
+          if (ing.id !== iid) return;
+          if (field === "qty") ing.qty = parseQty(value);
+          else ing[field] = value;
+        });
+        save();
+      }
+      function removeIngredient(rid, iid) {
+        var r = findRecipe(rid); if (!r) return;
+        r.ingredients = r.ingredients.filter(function (i) { return i.id !== iid; });
+        save(); render();
+      }
+      function addIngredient(rid, nameEl, qtyEl, unitEl) {
+        var r = findRecipe(rid); if (!r) return;
+        var name = nameEl.value.trim();
+        var qty = parseQty(qtyEl.value);
+        if (!name || qty <= 0) return;
+        r.ingredients.push({ id: uid(), name: name, qty: qty, unit: unitEl.value });
+        save(); render();
+      }
+      function toggleSelection(rid) {
+        var r = findRecipe(rid); if (!r) return;
+        if (state.selections[rid] != null) delete state.selections[rid];
+        else state.selections[rid] = r.portions;
+        save(); render();
+      }
+      function setSelectionPortions(rid, value) {
+        state.selections[rid] = Math.max(1, parseInt(value) || 1);
+        save();
+      }
+      function toggleBought(idx) {
+        var it = shopItems[idx];
+        var k = keyOf(it.name, it.unit);
+        if (state.bought[k]) delete state.bought[k]; else state.bought[k] = true;
+        save(); render();
+      }
+      function toggleOwned(idx) {
+        var it = shopItems[idx];
+        var k = keyOf(it.name, it.unit);
+        if (state.owned[k]) delete state.owned[k];
+        else { state.owned[k] = true; delete state.bought[k]; }
+        save(); render();
+      }
+      function resetBought() { state.bought = {}; save(); render(); }
+      function copyList() {
+        var lines = aggregate().filter(function (i) { return !state.owned[keyOf(i.name, i.unit)]; })
+          .map(function (i) { return "- " + i.name + " : " + fmtQty(i.qty, i.unit); });
+        var text = "Liste de courses — batch cooking\n\n" + lines.join("\n");
+        var done = function () {
+          var b = document.getElementById("copyBtn");
+          var old = b.textContent; b.textContent = "✓ Copié !";
+          setTimeout(function () { b.textContent = old; }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
+        } else { fallbackCopy(text); done(); }
+      }
+      function fallbackCopy(text) {
+        var ta = document.createElement("textarea");
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+
+      // ---------- Partage / sauvegarde ----------
+      function exportData() {
+        var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "mes-recettes-batch-cooking.json";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
+      }
+      function importData(input) {
+        var f = input.files && input.files[0];
+        if (!f) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+          try {
+            var parsed = JSON.parse(reader.result);
+            if (!parsed || !Array.isArray(parsed.recipes)) { alert("Ce fichier n'est pas une sauvegarde valide (recettes introuvables)."); return; }
+            if (state.recipes.length > 0 &&
+                !confirm("Remplacer tes " + state.recipes.length + " recette(s) actuelle(s) par le contenu du fichier ?\n\n(Clique sur « Annuler » pour ne rien changer)")) return;
+            parsed.owned = parsed.owned || {};
+            parsed.bought = parsed.bought || {};
+            parsed.selections = parsed.selections || {};
+            state = parsed; save(); render();
+          } catch (e) {
+            alert("Impossible de lire ce fichier : " + e.message);
+          }
+          input.value = "";
+        };
+        reader.readAsText(f);
+      }
+      function encodeState() {
+        return btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+      }
+      function shareLink() {
+        var url = location.href.split("#")[0] + "#d=" + encodeState();
+        var copy = function () { alert("Lien copié !\n\nAstuce : ce lien ne fonctionne que si l'outil est hébergé en ligne (http/https). Pour un partage via Drive, utilise plutôt « Exporter (fichier) » et « Importer (fichier) »."); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(copy, function () { fallbackCopy(url); copy(); });
+        } else { fallbackCopy(url); copy(); }
+      }
+      function applyHashState() {
+        try {
+          var m = (location.hash || "").match(/d=([A-Za-z0-9+/=]+)/);
+          if (!m) return false;
+          var parsed = JSON.parse(decodeURIComponent(escape(atob(m[1]))));
+          if (!parsed || !Array.isArray(parsed.recipes)) return false;
+          parsed.owned = parsed.owned || {};
+          parsed.bought = parsed.bought || {};
+          parsed.selections = parsed.selections || {};
+          state = parsed;
+          save();
+          history.replaceState(null, "", location.pathname + location.search);
+          return true;
+        } catch (e) { return false; }
+      }
+      var loadedFromLink = applyHashState();
+
+      // ---------- Rendu ----------
+      var app = document.getElementById("app");
+
+      function unitOptions(sel) {
+        return UNITS.map(function (u) {
+          return '<option value="' + esc(u) + '"' + (u === sel ? " selected" : "") + ">" + esc(u) + "</option>";
+        }).join("");
+      }
+
+      function renderRecipes() {
+        var html = '<p class="hint">Saisis tes recettes avec leurs ingrédients et leurs poids. Tout est sauvegardé automatiquement dans ce navigateur.</p>';
+        html += '<div class="row" style="margin-bottom:14px">';
+        html += '<button class="btn btn-primary" onclick="addRecipe()">+ Nouvelle recette</button>';
+        html += '<button class="btn btn-soft" title="Télécharge un fichier .json avec toutes tes recettes — à mettre sur Drive pour le partager" onclick="exportData()">⬇️ Exporter (fichier)</button>';
+        html += '<label class="btn btn-soft" for="importFile" title="Charge un fichier .json exporté précédemment" style="cursor:pointer">⬆️ Importer (fichier)</label>';
+        html += '<input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="importData(this)">';
+        html += '<button class="btn btn-soft" title="Copie un lien contenant tes recettes — utile si l\'outil est hébergé en ligne" onclick="shareLink()">🔗 Lien de partage</button>';
+        html += '</div>';
+        if (state.recipes.length === 0) {
+          html += '<div class="empty" style="margin-top:14px"><span class="icon">📖</span>Aucune recette — clique sur « Nouvelle recette » pour commencer</div>';
+        }
+        state.recipes.forEach(function (r) {
+          html += '<div class="card">';
+          html += '<div class="row"><input class="grow" type="text" value="' + esc(r.name) + '" placeholder="Nom de la recette" onchange="updateRecipeField(\'' + r.id + '\',\'name\',this.value)">';
+          html += '<input type="number" min="1" value="' + esc(r.portions) + '" onchange="updateRecipeField(\'' + r.id + '\',\'portions\',this.value)"> <span style="font-size:.8rem;color:#64748b">portions</span>';
+          html += '<button class="btn btn-ghost" title="Supprimer la recette" onclick="deleteRecipe(\'' + r.id + '\')">🗑</button></div>';
+          html += '<table><tbody>';
+          r.ingredients.forEach(function (ing) {
+            html += '<tr>';
+            html += '<td><input type="text" value="' + esc(ing.name) + '" onchange="updateIngredient(\'' + r.id + '\',\'' + ing.id + '\',\'name\',this.value)"></td>';
+            html += '<td><input type="text" value="' + esc(ing.qty) + '" onchange="updateIngredient(\'' + r.id + '\',\'' + ing.id + '\',\'qty\',this.value)"></td>';
+            html += '<td><select onchange="updateIngredient(\'' + r.id + '\',\'' + ing.id + '\',\'unit\',this.value)">' + unitOptions(ing.unit) + '</select></td>';
+            html += '<td style="width:30px;text-align:right"><button class="btn btn-ghost" title="Retirer" style="padding:2px 6px" onclick="removeIngredient(\'' + r.id + '\',\'' + ing.id + '\')">✕</button></td>';
+            html += '</tr>';
+          });
+          if (r.ingredients.length === 0) {
+            html += '<tr><td colspan="4" style="text-align:center;color:#94a3b8;font-size:.75rem;padding:10px">Aucun ingrédient pour le moment</td></tr>';
+          }
+          html += '</tbody></table>';
+          html += '<div class="row" style="margin-top:10px">';
+          html += '<input class="grow" type="text" id="newName-' + r.id + '" placeholder="Ingrédient…" onkeydown="if(event.key===\'Enter\')addIngredient(\'' + r.id + '\',document.getElementById(\'newName-' + r.id + '\'),document.getElementById(\'newQty-' + r.id + '\'),document.getElementById(\'newUnit-' + r.id + '\'))">';
+          html += '<input type="text" id="newQty-' + r.id + '" placeholder="Qté" style="width:64px;text-align:right" onkeydown="if(event.key===\'Enter\')addIngredient(\'' + r.id + '\',document.getElementById(\'newName-' + r.id + '\'),document.getElementById(\'newQty-' + r.id + '\'),document.getElementById(\'newUnit-' + r.id + '\'))">';
+          html += '<select id="newUnit-' + r.id + '">' + unitOptions("g") + '</select>';
+          html += '<button class="btn btn-primary" onclick="addIngredient(\'' + r.id + '\',document.getElementById(\'newName-' + r.id + '\'),document.getElementById(\'newQty-' + r.id + '\'),document.getElementById(\'newUnit-' + r.id + '\'))">+ Ajouter</button>';
+          html += '</div></div>';
+        });
+        return html;
+      }
+
+      function renderSelection() {
+        var html = '<p class="hint">Coche les recettes à préparer et ajuste les portions. Les quantités de la liste de courses seront recalculées proportionnellement.</p>';
+        if (state.recipes.length === 0) {
+          html += '<div class="empty"><span class="icon">🍽️</span>Pas encore de recettes — commence dans l\'onglet « Mes recettes »</div>';
+          return html;
+        }
+        state.recipes.forEach(function (r) {
+          var sel = state.selections[r.id] != null;
+          html += '<div class="sel-item' + (sel ? " on" : "") + '">';
+          html += '<label><input type="checkbox" class="checkbox"' + (sel ? " checked" : "") + ' onchange="toggleSelection(\'' + r.id + '\')">';
+          html += '<span><strong>' + esc(r.name) + '</strong><br><span class="meta">' + r.ingredients.length + ' ingrédient' + (r.ingredients.length > 1 ? "s" : "") + ' · recette pour ' + esc(r.portions) + ' portions</span></span></label>';
+          if (sel) {
+            html += '<span style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:.85rem;color:#475569">à cuisiner pour ';
+            html += '<input type="number" min="1" value="' + esc(state.selections[r.id]) + '" onchange="setSelectionPortions(\'' + r.id + '\',this.value)"> portions</span>';
+          }
+          html += '</div>';
+        });
+        var n = Object.keys(state.selections).length;
+        var tot = 0;
+        Object.keys(state.selections).forEach(function (k) { tot += state.selections[k]; });
+        html += '<div class="summary">' + n + ' recette' + (n > 1 ? "s" : "") + ' sélectionnée' + (n > 1 ? "s" : "") + ' → ' + tot + ' portions au total</div>';
+        return html;
+      }
+
+      var shopItems = [];
+      function renderShopping() {
+        var items = aggregate();
+        shopItems = items;
+        if (items.length === 0) {
+          return '<div class="empty"><span class="icon">🛒</span>Liste vide — sélectionne au moins une recette dans l\'onglet « Sélection courses »</div>';
+        }
+        var toBuy = items.filter(function (i) { return !state.owned[keyOf(i.name, i.unit)]; });
+        var owned = items.filter(function (i) { return state.owned[keyOf(i.name, i.unit)]; });
+        var boughtCount = toBuy.filter(function (i) { return state.bought[keyOf(i.name, i.unit)]; }).length;
+        var progress = toBuy.length ? Math.round((boughtCount / toBuy.length) * 100) : 0;
+
+        var html = '<div class="bar-wrap"><div style="font-size:.85rem;font-weight:600">Courses : ' + boughtCount + '/' + toBuy.length + ' achetés · ' + owned.length + ' déjà à la maison</div>';
+        html += '<div class="bar"><div style="width:' + progress + '%"></div></div>';
+        html += '<div class="row" style="margin-top:12px">';
+        html += '<button id="copyBtn" class="btn btn-primary" onclick="copyList()">Copier la liste</button>';
+        if (boughtCount > 0) html += '<button class="btn btn-soft" style="border:1px solid #475569;background:transparent;color:#fff" onclick="resetBought()">Réinitialiser</button>';
+        html += '</div></div>';
+
+        toBuy.forEach(function (i) {
+          var idx = shopItems.indexOf(i);
+          var k = keyOf(i.name, i.unit);
+          var done = !!state.bought[k];
+          html += '<div class="shop-item' + (done ? " done" : "") + '">';
+          html += '<label><input type="checkbox" class="checkbox"' + (done ? " checked" : "") + ' onchange="toggleBought(' + idx + ')">';
+          html += '<span class="iname">' + esc(i.name) + '</span>';
+          if (i.count > 1) html += '<span class="badge">' + i.count + ' recettes</span>';
+          html += '</label>';
+          html += '<span class="qty">' + esc(fmtQty(i.qty, i.unit)) + '</span>';
+          html += '<button class="btn btn-amber" title="Je l\'ai déjà à la maison" onclick="toggleOwned(' + idx + ')">🏠 Déjà en stock</button>';
+          html += '</div>';
+        });
+
+        if (owned.length > 0) {
+          html += '<details class="owned-box"><summary>🏠 Déjà à la maison (' + owned.length + ')</summary><div style="margin-top:10px">';
+          owned.forEach(function (i) {
+            var idx = shopItems.indexOf(i);
+            html += '<div class="owned-item"><span>' + esc(i.name) + ' — ' + esc(fmtQty(i.qty, i.unit)) + '</span>';
+            html += '<button onclick="toggleOwned(' + idx + ')">remettre dans la liste</button></div>';
+          });
+          html += '</div></details>';
+        }
+        return html;
+      }
+
+      function render() {
+        var n = Object.keys(state.selections).length;
+        var html = '<header><h1>🥕 Batch Cooking</h1><p>Tes recettes, ta sélection de la semaine et ta liste de courses consolidée.</p></header>';
+        html += '<nav>';
+        html += '<button class="' + (tab === "recipes" ? "active" : "") + '" onclick="switchTab(\'recipes\')">📖 Mes recettes</button>';
+        html += '<button class="' + (tab === "selection" ? "active" : "") + '" onclick="switchTab(\'selection\')">🍽️ Sélection courses</button>';
+        html += '<button class="' + (tab === "shopping" ? "active" : "") + '" onclick="switchTab(\'shopping\')">🛒 Liste de courses' + (n > 0 ? " · " + n : "") + '</button>';
+        html += '</nav>';
+        if (loadedFromLink) {
+          html += '<div style="background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46;border-radius:10px;padding:10px 14px;font-size:.8rem;margin-bottom:14px">✓ Recettes chargées depuis un lien ou fichier partagé.</div>';
+        }
+        if (tab === "recipes") html += renderRecipes();
+        else if (tab === "selection") html += renderSelection();
+        else html += renderShopping();
+        html += '<footer>Les ingrédients communs sont automatiquement additionnés (kg → g, L/cl → ml).</footer>';
+        if (!storageOK) {
+          html += '<div class="danger-note">⚠️ La sauvegarde automatique est indisponible dans ce contexte — tes données ne seront pas conservées entre deux ouvertures.</div>';
+        }
+        app.innerHTML = html;
+      }
+
+      render();
+    </script>
+  </body>
+</html>
