@@ -335,6 +335,17 @@
           navigator.clipboard.writeText(url).then(copy, function () { fallbackCopy(url); copy(); });
         } else { fallbackCopy(url); copy(); }
       }
+      function shareList() {
+        var url = location.href.split("#")[0] + "#d=" + encodeState();
+        var b = document.getElementById("shareListBtn");
+        var done = function () {
+          var old = b.textContent; b.textContent = "✓ Lien copié !";
+          setTimeout(function () { b.textContent = old; }, 2500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(done, function () { fallbackCopy(url); done(); });
+        } else { fallbackCopy(url); done(); }
+      }
       function applyHashState() {
         try {
           var m = (location.hash || "").match(/d=([A-Za-z0-9+/=]+)/);
@@ -351,47 +362,6 @@
         } catch (e) { return false; }
       }
       var loadedFromLink = applyHashState();
-
-      // ---------- Recettes partagées (recettes.json à côté du fichier) ----------
-      var SHARED_JSON = "recettes.json";
-      var sharedNotice = "";
-      function normalizeState(parsed) {
-        parsed.owned = parsed.owned || {};
-        parsed.bought = parsed.bought || {};
-        parsed.selections = parsed.selections || {};
-        return parsed;
-      }
-      function fetchShared(askConfirm) {
-        return fetch(SHARED_JSON, { cache: "no-store" })
-          .then(function (r) {
-            if (!r.ok) throw new Error("HTTP " + r.status);
-            return r.json();
-          })
-          .then(function (parsed) {
-            if (!parsed || !Array.isArray(parsed.recipes) || parsed.recipes.length === 0) {
-              if (askConfirm) sharedNotice = "⚠️ Le fichier partagé ne contient aucune recette.";
-              return null;
-            }
-            if (askConfirm && state.recipes.length > 0 &&
-                !confirm("Remplacer tes " + state.recipes.length + " recette(s) actuelle(s) par les " +
-                         parsed.recipes.length + " recette(s) partagées ?\n\n(Clique sur « Annuler » pour ne rien changer)")) {
-              return null;
-            }
-            state = normalizeState(parsed);
-            save(); render();
-            sharedNotice = "✓ " + parsed.recipes.length + " recette(s) partagée(s) chargée(s).";
-            render();
-            return true;
-          })
-          .catch(function () {
-            if (askConfirm) {
-              sharedNotice = "⚠️ Impossible de récupérer les recettes partagées (fichier recettes.json introuvable ou ouverture locale).";
-              render();
-            }
-          });
-      }
-      // Premier chargement en ligne : récupérer les recettes partagées si rien en local
-      if (!loadedFromLink && !hadSavedData) fetchShared(false);
 
       // ---------- Recettes partagées (recettes.json à côté du fichier) ----------
       var SHARED_JSON = "recettes.json";
@@ -527,6 +497,7 @@
         html += '<div class="bar"><div style="width:' + progress + '%"></div></div>';
         html += '<div class="row" style="margin-top:12px">';
         html += '<button id="copyBtn" class="btn btn-primary" onclick="copyList()">Copier la liste</button>';
+        html += '<button id="shareListBtn" class="btn btn-primary" style="background:#34d399" title="Copie un lien : la personne qui l\'ouvre verra cette liste, avec tes recettes sélectionnées et tes articles cochés" onclick="shareList()">🔗 Partager cette liste</button>';
         if (boughtCount > 0) html += '<button class="btn btn-soft" style="border:1px solid #475569;background:transparent;color:#fff" onclick="resetBought()">Réinitialiser</button>';
         html += '</div></div>';
 
@@ -565,7 +536,7 @@
         html += '<button class="' + (tab === "shopping" ? "active" : "") + '" onclick="switchTab(\'shopping\')">🛒 Liste de courses' + (n > 0 ? " · " + n : "") + '</button>';
         html += '</nav>';
         if (loadedFromLink) {
-          html += '<div style="background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46;border-radius:10px;padding:10px 14px;font-size:.8rem;margin-bottom:14px">✓ Recettes chargées depuis un lien ou fichier partagé.</div>';
+          html += '<div style="background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46;border-radius:10px;padding:10px 14px;font-size:.8rem;margin-bottom:14px">✓ Liste partagée chargée : recettes, sélection et articles cochés repris tels quels. Tu peux continuer à cocher chez toi, puis re-partager le lien mis à jour.</div>';
         }
         if (tab === "recipes") html += renderRecipes();
         else if (tab === "selection") html += renderSelection();
