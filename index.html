@@ -137,9 +137,11 @@
       };
 
       var storageOK = true;
+      var hadSavedData = false;
       function load() {
         try {
           var raw = localStorage.getItem(KEY);
+          hadSavedData = !!raw;
           if (!raw) return JSON.parse(JSON.stringify(SAMPLE));
           var parsed = JSON.parse(raw);
           if (!parsed || !Array.isArray(parsed.recipes)) return JSON.parse(JSON.stringify(SAMPLE));
@@ -350,6 +352,88 @@
       }
       var loadedFromLink = applyHashState();
 
+      // ---------- Recettes partagées (recettes.json à côté du fichier) ----------
+      var SHARED_JSON = "recettes.json";
+      var sharedNotice = "";
+      function normalizeState(parsed) {
+        parsed.owned = parsed.owned || {};
+        parsed.bought = parsed.bought || {};
+        parsed.selections = parsed.selections || {};
+        return parsed;
+      }
+      function fetchShared(askConfirm) {
+        return fetch(SHARED_JSON, { cache: "no-store" })
+          .then(function (r) {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.json();
+          })
+          .then(function (parsed) {
+            if (!parsed || !Array.isArray(parsed.recipes) || parsed.recipes.length === 0) {
+              if (askConfirm) sharedNotice = "⚠️ Le fichier partagé ne contient aucune recette.";
+              return null;
+            }
+            if (askConfirm && state.recipes.length > 0 &&
+                !confirm("Remplacer tes " + state.recipes.length + " recette(s) actuelle(s) par les " +
+                         parsed.recipes.length + " recette(s) partagées ?\n\n(Clique sur « Annuler » pour ne rien changer)")) {
+              return null;
+            }
+            state = normalizeState(parsed);
+            save(); render();
+            sharedNotice = "✓ " + parsed.recipes.length + " recette(s) partagée(s) chargée(s).";
+            render();
+            return true;
+          })
+          .catch(function () {
+            if (askConfirm) {
+              sharedNotice = "⚠️ Impossible de récupérer les recettes partagées (fichier recettes.json introuvable ou ouverture locale).";
+              render();
+            }
+          });
+      }
+      // Premier chargement en ligne : récupérer les recettes partagées si rien en local
+      if (!loadedFromLink && !hadSavedData) fetchShared(false);
+
+      // ---------- Recettes partagées (recettes.json à côté du fichier) ----------
+      var SHARED_JSON = "recettes.json";
+      var sharedNotice = "";
+      function normalizeState(parsed) {
+        parsed.owned = parsed.owned || {};
+        parsed.bought = parsed.bought || {};
+        parsed.selections = parsed.selections || {};
+        return parsed;
+      }
+      function fetchShared(askConfirm) {
+        return fetch(SHARED_JSON, { cache: "no-store" })
+          .then(function (r) {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.json();
+          })
+          .then(function (parsed) {
+            if (!parsed || !Array.isArray(parsed.recipes) || parsed.recipes.length === 0) {
+              if (askConfirm) sharedNotice = "⚠️ Le fichier partagé ne contient aucune recette.";
+              return null;
+            }
+            if (askConfirm && state.recipes.length > 0 &&
+                !confirm("Remplacer tes " + state.recipes.length + " recette(s) actuelle(s) par les " +
+                         parsed.recipes.length + " recette(s) partagées ?\n\n(Clique sur « Annuler » pour ne rien changer)")) {
+              return null;
+            }
+            state = normalizeState(parsed);
+            save(); render();
+            sharedNotice = "✓ " + parsed.recipes.length + " recette(s) partagée(s) chargée(s).";
+            render();
+            return true;
+          })
+          .catch(function () {
+            if (askConfirm) {
+              sharedNotice = "⚠️ Impossible de récupérer les recettes partagées (fichier recettes.json introuvable ou ouverture locale).";
+              render();
+            }
+          });
+      }
+      // Premier chargement en ligne : récupérer les recettes partagées si rien en local
+      if (!loadedFromLink && !hadSavedData) fetchShared(false);
+
       // ---------- Rendu ----------
       var app = document.getElementById("app");
 
@@ -367,7 +451,11 @@
         html += '<label class="btn btn-soft" for="importFile" title="Charge un fichier .json exporté précédemment" style="cursor:pointer">⬆️ Importer (fichier)</label>';
         html += '<input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="importData(this)">';
         html += '<button class="btn btn-soft" title="Copie un lien contenant tes recettes — utile si l\'outil est hébergé en ligne" onclick="shareLink()">🔗 Lien de partage</button>';
+        html += '<button class="btn btn-soft" title="Recharge les recettes du fichier partagé recettes.json (en ligne uniquement)" onclick="sharedNotice=\'\';fetchShared(true)">🔄 Recettes partagées</button>';
         html += '</div>';
+        if (sharedNotice) {
+          html += '<div style="background:#f8fafc;border:1px solid #e2e8f0;color:#475569;border-radius:10px;padding:10px 14px;font-size:.8rem;margin-bottom:14px">' + sharedNotice + '</div>';
+        }
         if (state.recipes.length === 0) {
           html += '<div class="empty" style="margin-top:14px"><span class="icon">📖</span>Aucune recette — clique sur « Nouvelle recette » pour commencer</div>';
         }
