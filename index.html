@@ -132,6 +132,7 @@
           ]}
         ],
         selections: { r1: 4, r3: 4 },
+        planning: {},
         owned: {},
         bought: {}
       };
@@ -148,6 +149,7 @@
           parsed.owned = parsed.owned || {};
           parsed.bought = parsed.bought || {};
           parsed.selections = parsed.selections || {};
+          parsed.planning = parsed.planning || {};
           return parsed;
         } catch (e) {
           storageOK = false;
@@ -227,6 +229,11 @@
       function deleteRecipe(id) {
         state.recipes = state.recipes.filter(function (r) { return r.id !== id; });
         delete state.selections[id];
+        if (state.planning) {
+          Object.keys(state.planning).forEach(function (k) {
+            if (state.planning[k] === id) delete state.planning[k];
+          });
+        }
         save(); render();
       }
       function updateIngredient(rid, iid, field, value) {
@@ -253,8 +260,14 @@
       }
       function toggleSelection(rid) {
         var r = findRecipe(rid); if (!r) return;
-        if (state.selections[rid] != null) delete state.selections[rid];
-        else state.selections[rid] = r.portions;
+        if (state.selections[rid] != null) {
+          delete state.selections[rid];
+          if (state.planning) {
+            Object.keys(state.planning).forEach(function (k) {
+              if (state.planning[k] === rid) delete state.planning[k];
+            });
+          }
+        } else state.selections[rid] = r.portions;
         save(); render();
       }
       function setSelectionPortions(rid, value) {
@@ -276,9 +289,19 @@
       }
       function resetBought() { state.bought = {}; save(); render(); }
       function copyList() {
-        var lines = aggregate().filter(function (i) { return !state.owned[keyOf(i.name, i.unit)]; })
-          .map(function (i) { return "- " + i.name + " : " + fmtQty(i.qty, i.unit); });
-        var text = "Liste de courses — batch cooking\n\n" + lines.join("\n");
+        var toBuyAll = aggregate().filter(function (i) { return !state.owned[keyOf(i.name, i.unit)]; });
+        var groups = {};
+        toBuyAll.forEach(function (i) {
+          var c = categoryOf(i.name);
+          if (!groups[c]) groups[c] = [];
+          groups[c].push(i);
+        });
+        var parts = [];
+        Object.keys(groups).sort(function (a, b) { return a.localeCompare(b, "fr"); }).forEach(function (cat) {
+          var lines = groups[cat].map(function (i) { return "- " + i.name + " : " + fmtQty(i.qty, i.unit); });
+          parts.push("## " + cat + "\n" + lines.join("\n"));
+        });
+        var text = "Liste de courses — batch cooking\n\n" + parts.join("\n\n");
         var done = function () {
           var b = document.getElementById("copyBtn");
           var old = b.textContent; b.textContent = "✓ Copié !";
@@ -317,6 +340,7 @@
             parsed.owned = parsed.owned || {};
             parsed.bought = parsed.bought || {};
             parsed.selections = parsed.selections || {};
+            parsed.planning = parsed.planning || {};
             state = parsed; save(); render();
           } catch (e) {
             alert("Impossible de lire ce fichier : " + e.message);
@@ -355,6 +379,7 @@
           parsed.owned = parsed.owned || {};
           parsed.bought = parsed.bought || {};
           parsed.selections = parsed.selections || {};
+          parsed.planning = parsed.planning || {};
           state = parsed;
           save();
           history.replaceState(null, "", location.pathname + location.search);
@@ -363,6 +388,125 @@
       }
       var loadedFromLink = applyHashState();
 
+      // ---------- Synchronisation partagée (Supabase) ----------
+      var SYNC_KEY = "batch-cooking-sync-v1";
+      var syncConf = null;
+      var syncStatus = "";
+      var syncBusy = false;
+      var lastPushAt = 0;
+      var REMOTE_ROW = "main";
+
+      try {
+        syncConf = JSON.parse(localStorage.getItem(SYNC_KEY) || "null");
+      } catch (e) { syncConf = null; }
+
+      function saveSyncConf() {
+        try { localStorage.setItem(SYNC_KEY, JSON.stringify(syncConf)); } catch (e) {}
+      }
+      function syncEnabled() {
+        return !!(syncConf && syncConf.url && syncConf.key);
+      }
+      function syncHeaders() {
+        return {
+          "apikey": syncConf.key,
+          "Authorization": "Bearer " + syncConf.key,
+          "Content-Type": "application/json",
+          "Prefer": "resolution=merge-duplicates"
+        };
+      }
+
+      // Pousse l'état courant dans Supabase (créé/met à jour la ligne "main")
+      function syncPush(showMsg) {
+        if (!syncEnabled() || syncBusy) return;
+        syncBusy = true;
+        var payload = {
+          id: REMOTE_ROW,
+          data: state,
+          updated_at: new Date().toISOString()
+        };
+        fetch(syncConf.url + "/rest/v1/shared_state?on_conflict=id", {
+          method: "POST",
+          headers: syncHeaders(),
+          body: JSON.stringify(payload)
+        })
+          .then(function (r) {
+            if (!r.ok && r.status !== 201) throw new Error("HTTP " + r.status);
+            lastPushAt = Date.now();
+            syncStatus = "✓ Synchronisé";
+            if (showMsg) render();
+            else updateSyncBadge();
+          })
+          .catch(function (e) {
+            syncStatus = "⚠️ Erreur d'envoi : " + e.message;
+            updateSyncBadge();
+          })
+          .then(function () { syncBusy = false; });
+      }
+
+      // Récupère l'état distant et l'applique s'il est plus récent
+      function syncPull(auto) {
+        if (!syncEnabled() || syncBusy) return Promise.resolve(false);
+        return fetch(syncConf.url + "/rest/v1/shared_state?id=eq." + REMOTE_ROW + "&select=data,updated_at", {
+          method: "GET",
+          headers: { "apikey": syncConf.key, "Authorization": "Bearer " + syncConf.key }
+        })
+          .then(function (r) {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.json();
+          })
+          .then(function (rows) {
+            if (!rows || rows.length === 0) return false;
+            var remote = rows[0];
+            if (!remote.data || !Array.isArray(remote.data.recipes)) return false;
+            // Ne pas écraser si on vient tout juste de pousser (dans les 15 s)
+            if (Date.now() - lastPushAt < 15000) return false;
+            var remoteTime = Date.parse(remote.updated_at || 0) || 0;
+            var localTime = 0;
+            try { localTime = Date.parse(state.updated_at || 0) || 0; } catch (e) {}
+            state = normalizeState(remote.data);
+            baseSave(); render();
+            return true;
+          })
+          .catch(function (e) {
+            syncStatus = "⚠️ Erreur de récupération : " + e.message;
+            return false;
+          });
+      }
+
+      // Patch de save() : pousse aussi vers Supabase quand activé
+      var baseSave = save;
+      save = function () {
+        baseSave();
+        if (syncEnabled()) syncPush(false);
+      };
+
+      function updateSyncBadge() {
+        var el = document.getElementById("syncBadge");
+        if (el) el.textContent = syncStatus;
+      }
+
+      // Vérification périodique (toutes les 10 s)
+      setInterval(function () {
+        if (syncEnabled() && !document.hidden) syncPull(true);
+      }, 10000);
+
+      function openSyncSettings() {
+        var url = prompt("URL du projet Supabase\n(ex: https://xxxx.supabase.co)\n\nLaisse vide pour désactiver la synchro.", syncConf ? (syncConf.url || "") : "");
+        if (url === null) return;
+        url = url.trim().replace(/\/+$/, "");
+        var key = "";
+        if (url) {
+          key = prompt("Clé anon (public) Supabase\n\n(Settings → API → anon public)", syncConf ? (syncConf.key || "") : "");
+          if (key === null) return;
+        }
+        syncConf = url ? { url: url, key: key.trim() } : null;
+        saveSyncConf();
+        syncStatus = syncEnabled() ? "✓ Synchronisation activée" : "";
+        render();
+        if (syncEnabled()) syncPush(true);
+      }
+
+
       // ---------- Recettes partagées (recettes.json à côté du fichier) ----------
       var SHARED_JSON = "recettes.json";
       var sharedNotice = "";
@@ -370,6 +514,7 @@
         parsed.owned = parsed.owned || {};
         parsed.bought = parsed.bought || {};
         parsed.selections = parsed.selections || {};
+        parsed.planning = parsed.planning || {};
         return parsed;
       }
       function fetchShared(askConfirm) {
@@ -413,6 +558,17 @@
         }).join("");
       }
 
+      var recipeFilter = "";
+      function filterCards(q) {
+        recipeFilter = normName(q);
+        var cards = document.querySelectorAll("[data-search]");
+        for (var i = 0; i < cards.length; i++) {
+          var el = cards[i];
+          var match = !recipeFilter || el.getAttribute("data-search").indexOf(recipeFilter) !== -1;
+          el.style.display = match ? "" : "none";
+        }
+      }
+
       function renderRecipes() {
         var html = '<p class="hint">Saisis tes recettes avec leurs ingrédients et leurs poids. Tout est sauvegardé automatiquement dans ce navigateur.</p>';
         html += '<div class="row" style="margin-bottom:14px">';
@@ -423,6 +579,9 @@
         html += '<button class="btn btn-soft" title="Copie un lien contenant tes recettes — utile si l\'outil est hébergé en ligne" onclick="shareLink()">🔗 Lien de partage</button>';
         html += '<button class="btn btn-soft" title="Recharge les recettes du fichier partagé recettes.json (en ligne uniquement)" onclick="sharedNotice=\'\';fetchShared(true)">🔄 Recettes partagées</button>';
         html += '</div>';
+        if (state.recipes.length > 0) {
+          html += '<input class="grow" type="text" placeholder="🔍 Filtrer par nom de recette ou ingrédient…" oninput="filterCards(this.value)" style="margin-bottom:12px">';
+        }
         if (sharedNotice) {
           html += '<div style="background:#f8fafc;border:1px solid #e2e8f0;color:#475569;border-radius:10px;padding:10px 14px;font-size:.8rem;margin-bottom:14px">' + sharedNotice + '</div>';
         }
@@ -430,7 +589,8 @@
           html += '<div class="empty" style="margin-top:14px"><span class="icon">📖</span>Aucune recette — clique sur « Nouvelle recette » pour commencer</div>';
         }
         state.recipes.forEach(function (r) {
-          html += '<div class="card">';
+          var searchText = normName(r.name + " " + r.ingredients.map(function (i) { return i.name; }).join(" "));
+          html += '<div class="card" data-search="' + esc(searchText) + '">';
           html += '<div class="row"><input class="grow" type="text" value="' + esc(r.name) + '" placeholder="Nom de la recette" onchange="updateRecipeField(\'' + r.id + '\',\'name\',this.value)">';
           html += '<input type="number" min="1" value="' + esc(r.portions) + '" onchange="updateRecipeField(\'' + r.id + '\',\'portions\',this.value)"> <span style="font-size:.8rem;color:#64748b">portions</span>';
           html += '<button class="btn btn-ghost" title="Supprimer la recette" onclick="deleteRecipe(\'' + r.id + '\')">🗑</button></div>';
@@ -481,7 +641,119 @@
         return html;
       }
 
+      // ---------- Catégories de la liste de courses ----------
+      var CAT_OVERRIDE = {
+        "lait de coco": "Épicerie & condiments",
+        "crème de coco": "Épicerie & condiments",
+        "beurre de cacahuète": "Épicerie & condiments",
+        "beurre de cacahuete": "Épicerie & condiments",
+        "tomates concassées": "Épicerie & condiments",
+        "tofu": "Épicerie & condiments",
+        "houmous": "Épicerie & condiments",
+        "sauce soja": "Épicerie & condiments",
+        "sauce sriracha": "Épicerie & condiments"
+      };
+      var CATEGORIES = [
+        ["Viandes & volailles", ["poulet", "bœuf", "boeuf", "veau", "porc", "agneau", "dinde", "lardon", "saucisse", "merguez", "jambon", "viande", "haché", "hache", "steak", "escalope", "cuisse", "cordon", "toulouse", "charcuterie", "lapin", "canard", "chair"]],
+        ["Poissons & fruits de mer", ["poisson", "cabillaud", "saumon", "thon", "crevette", "moule", "sardine", "colin", "truite", "anchois", "morue", "tilapia", "lotte", "merlu", "fruits de mer", "surimi"]],
+        ["Œufs & laitages", ["œuf", "oeuf", "lait", "crème", "creme", "yaourt", "fromage", "beurre", "mozzarella", "parmesan", "gruyère", "gruyere", "feta", "chèvre", "chevre", "burrata", "ricotta", "comté", "comte", "emmental", "halloumi", "mascarpone", "reblochon", "laitage"]],
+        ["Féculents, céréales & légumineuses", ["riz", "pâtes", "pate", "pates", "penne", "spaghetti", "nouille", "soba", "semoule", "quinoa", "boulgour", "couscous", "gnocchis", "pain", "buns", "pita", "tortilla", "lasagne", "farine", "polenta", "sarrasin", "avoine", "orge", "lentille", "haricot", "pois chiche", "blé", "ble ", "pommes de terre", "patate", "céréale", "cereale", "chapelure", "panko", "brioche"]],
+        ["Fruits & légumes frais", ["oignon", "échalote", "echalote", "ail", "tomate", "carotte", "poireau", "courgette", "aubergine", "poivron", "concombre", "salade", "romaine", "épinard", "epinard", "brocoli", "champignon", "courge", "butternut", "betterave", "chou", "céleri", "celeri", "radis", "citron", "orange", "banane", "pomme", "poire", "fraise", "framboise", "myrtille", "ananas", "mangue", "kiwi", "avocat", "fruit", "légume", "legume", "gingembre", "piment", "persil", "coriandre", "basilic", "menthe", "sauge", "estragon", "thym", "cerfeuil", "aneth", "petits pois", "edamame", "maïs", "mais "]],
+        ["Épicerie & condiments", ["sauce", "soja", "miel", "huile", "vinaigre", "curry", "paprika", "cumin", "épice", "epice", "herbes de provence", "garam", "ras-el", "ras el", "cannelle", "muscade", "poivre", "sel ", " sucre", "sirop", "cacahuète", "cacahuete", "tahini", "gochujang", "sriracha", "moutarde", "mayonnaise", "olive", "câpre", "capre", "bouillon", "levure", "graine", "sésame", "sesame", "cornichon", "chipotle", "harissa", "poudre", "purée", "puree", "sirop"]]
+      ];
+      function categoryOf(name) {
+        var n = normName(name);
+        for (var ov in CAT_OVERRIDE) {
+          if (n.indexOf(ov) !== -1) return CAT_OVERRIDE[ov];
+        }
+        if (n.indexOf("boîte") !== -1 || n.indexOf("boite") !== -1) return "Épicerie & condiments";
+        for (var c = 0; c < CATEGORIES.length; c++) {
+          var kws = CATEGORIES[c][1];
+          for (var k = 0; k < kws.length; k++) {
+            if (n.indexOf(kws[k]) !== -1) return CATEGORIES[c][0];
+          }
+        }
+        return "Autres";
+      }
+
       var shopItems = [];
+      // ---------- Planning hebdomadaire ----------
+      var DAYS = [
+        ["lun", "Lundi"], ["mar", "Mardi"], ["mer", "Mercredi"],
+        ["jeu", "Jeudi"], ["ven", "Vendredi"], ["sam", "Samedi"], ["dim", "Dimanche"]
+      ];
+      var SLOTS = [["midi", "Midi"], ["soir", "Soir"]];
+
+      function setSlot(day, slot, recipeId) {
+        if (!state.planning) state.planning = {};
+        var k = day + "-" + slot;
+        if (recipeId) state.planning[k] = recipeId;
+        else delete state.planning[k];
+        save(); render();
+      }
+
+      function renderPlanning() {
+        if (!state.planning) state.planning = {};
+        var selRecipes = state.recipes.filter(function (r) { return state.selections[r.id] != null; });
+        var html = '<p class="hint">Affecte les plats sélectionnés aux jours de la semaine (midi/soir). Une même recette peut être planifiée plusieurs fois pour finir les restes.</p>';
+        if (selRecipes.length === 0) {
+          html += '<div class="empty"><span class="icon">📅</span>Aucune recette sélectionnée — coche des recettes dans l\'onglet « Sélection courses » pour remplir le planning.</div>';
+          return html;
+        }
+
+        // Options communes (inutilisées si reconstruction inline)
+        var plannedCount = {};
+        DAYS.forEach(function (d) {
+          SLOTS.forEach(function (s) {
+            var id = state.planning[d[0] + "-" + s[0]];
+            if (id) plannedCount[id] = (plannedCount[id] || 0) + 1;
+          });
+        });
+
+        var plannedTotal = Object.keys(plannedCount).length;
+        if (plannedTotal > 0) {
+          html += '<button class="btn btn-soft" style="margin-bottom:12px" onclick="for(var k in state.planning) delete state.planning[k];save();render()">🧹 Vider le planning</button>';
+        }
+
+        html += '<div class="card" style="background:#f8fafc">';
+        DAYS.forEach(function (d) {
+          html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #e2e8f0">';
+          html += '<strong style="width:90px;font-size:.85rem">' + d[1] + '</strong>';
+          SLOTS.forEach(function (s) {
+            var key = d[0] + "-" + s[0];
+            var current = state.planning[key] || "";
+            html += '<span style="display:flex;align-items:center;gap:6px;flex:1;min-width:200px">';
+            html += '<span style="font-size:.72rem;color:#64748b;width:32px">' + s[1] + '</span>';
+            html += '<select class="grow" style="flex:1" onchange="setSlot(\'' + d[0] + '\',\'' + s[0] + '\',this.value)">';
+            // reconstruit les options avec sélection courante
+            selRecipes.forEach(function (r) {
+              var sel = current === r.id ? " selected" : "";
+              html += '<option value="' + r.id + '"' + sel + '>' + esc(r.name) + ' (' + state.selections[r.id] + ' p.)</option>';
+            });
+            var free = !selRecipes.some(function (r) { return r.id === current; }) ? " selected" : "";
+            html += '<option value=""' + free + '>— libre —</option>';
+            html += '</select></span>';
+          });
+          html += '</div>';
+        });
+        html += '</div>';
+
+        // Récap par recette planifiée
+        var used = Object.keys(plannedCount);
+        if (used.length > 0) {
+          html += '<div class="card"><strong style="font-size:.85rem">Récapitulatif</strong><table style="margin-top:6px"><tbody>';
+          used.forEach(function (id) {
+            var r = findRecipe(id);
+            if (!r) return;
+            var selP = state.selections[id] || 0;
+            var n = plannedCount[id];
+            html += '<tr><td>' + esc(r.name) + '</td><td style="text-align:right;color:#64748b">' + n + ' repas planifié' + (n > 1 ? 's' : '') + ' · ' + selP + ' portions à cuisiner</td></tr>';
+          });
+          html += '</tbody></table></div>';
+        }
+        return html;
+      }
+
       function renderShopping() {
         var items = aggregate();
         shopItems = items;
@@ -501,7 +773,30 @@
         if (boughtCount > 0) html += '<button class="btn btn-soft" style="border:1px solid #475569;background:transparent;color:#fff" onclick="resetBought()">Réinitialiser</button>';
         html += '</div></div>';
 
+        // Regroupement par catégorie
+        var groups = {};
         toBuy.forEach(function (i) {
+          var c = categoryOf(i.name);
+          if (!groups[c]) groups[c] = [];
+          groups[c].push(i);
+        });
+        var catOrder = CATEGORIES.map(function (c) { return c[0]; });
+        var allCats = Object.keys(groups).sort(function (a, b) {
+          var ia = catOrder.indexOf(a), ib = catOrder.indexOf(b);
+          if (ia === -1) ia = 999; if (ib === -1) ib = 999;
+          if (ia !== ib) return ia - ib;
+          return a.localeCompare(b, "fr");
+        });
+
+        allCats.forEach(function (cat) {
+          var items = groups[cat];
+          var boughtInCat = items.filter(function (i) { return state.bought[keyOf(i.name, i.unit)]; }).length;
+          html += '<div style="margin:18px 0 8px;display:flex;align-items:center;gap:8px">';
+          html += '<strong style="font-size:.9rem;color:#334155">' + esc(cat) + '</strong>';
+          html += '<span style="font-size:.72rem;color:#94a3b8">' + (items.length - boughtInCat) + ' à acheter</span>';
+          html += '<div style="flex:1;height:1px;background:#e2e8f0"></div>';
+          html += '</div>';
+          items.forEach(function (i) {
           var idx = shopItems.indexOf(i);
           var k = keyOf(i.name, i.unit);
           var done = !!state.bought[k];
@@ -513,6 +808,7 @@
           html += '<span class="qty">' + esc(fmtQty(i.qty, i.unit)) + '</span>';
           html += '<button class="btn btn-amber" title="Je l\'ai déjà à la maison" onclick="toggleOwned(' + idx + ')">🏠 Déjà en stock</button>';
           html += '</div>';
+          });
         });
 
         if (owned.length > 0) {
@@ -533,13 +829,22 @@
         html += '<nav>';
         html += '<button class="' + (tab === "recipes" ? "active" : "") + '" onclick="switchTab(\'recipes\')">📖 Mes recettes</button>';
         html += '<button class="' + (tab === "selection" ? "active" : "") + '" onclick="switchTab(\'selection\')">🍽️ Sélection courses</button>';
+        html += '<button class="' + (tab === "planning" ? "active" : "") + '" onclick="switchTab(\'planning\')">📅 Planning</button>';
         html += '<button class="' + (tab === "shopping" ? "active" : "") + '" onclick="switchTab(\'shopping\')">🛒 Liste de courses' + (n > 0 ? " · " + n : "") + '</button>';
         html += '</nav>';
+        html += '<div class="row" style="margin-bottom:14px;gap:6px">';
+        html += '<button class="btn btn-soft" style="font-size:.75rem" onclick="openSyncSettings()" title="Configurer la synchronisation partagée (Supabase)">☁️ ' + (syncEnabled() ? "Synchro partagée : activée" : "Synchro partagée : désactivée") + '</button>';
+        if (syncEnabled()) {
+          html += '<span id="syncBadge" style="font-size:.72rem;color:#64748b">' + esc(syncStatus) + '</span>';
+          html += '<button class="btn btn-soft" style="font-size:.75rem" onclick="syncPull(true).then(function(changed){if(!changed){syncStatus=\'✓ Déjà à jour\';render();}})" title="Récupérer immédiatement la version partagée">🔄 Actualiser</button>';
+        }
+        html += '</div>';
         if (loadedFromLink) {
           html += '<div style="background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46;border-radius:10px;padding:10px 14px;font-size:.8rem;margin-bottom:14px">✓ Liste partagée chargée : recettes, sélection et articles cochés repris tels quels. Tu peux continuer à cocher chez toi, puis re-partager le lien mis à jour.</div>';
         }
         if (tab === "recipes") html += renderRecipes();
         else if (tab === "selection") html += renderSelection();
+        else if (tab === "planning") html += renderPlanning();
         else html += renderShopping();
         html += '<footer>Les ingrédients communs sont automatiquement additionnés (kg → g, L/cl → ml).</footer>';
         if (!storageOK) {
