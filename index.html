@@ -683,10 +683,11 @@
         ["jeu", "Jeudi"], ["ven", "Vendredi"], ["sam", "Samedi"], ["dim", "Dimanche"]
       ];
       var SLOTS = [["midi", "Midi"], ["soir", "Soir"]];
+      var WEEKS = [["", "Semaine 1"], ["2-", "Semaine 2"]];
 
-      function setSlot(day, slot, recipeId) {
+      function setSlot(keyPrefix, day, slot, recipeId) {
         if (!state.planning) state.planning = {};
-        var k = day + "-" + slot;
+        var k = keyPrefix + day + "-" + slot;
         if (recipeId) state.planning[k] = recipeId;
         else delete state.planning[k];
         save(); render();
@@ -695,7 +696,7 @@
       function renderPlanning() {
         if (!state.planning) state.planning = {};
         var selRecipes = state.recipes.filter(function (r) { return state.selections[r.id] != null; });
-        var html = '<p class="hint">Affecte les plats sélectionnés aux jours de la semaine (midi/soir). Une même recette peut être planifiée plusieurs fois pour finir les restes.</p>';
+        var html = '<p class="hint">Affecte les plats sélectionnés sur <strong>deux semaines</strong> (midi/soir). Une même recette peut être planifiée plusieurs fois pour finir les restes.</p>';
         if (selRecipes.length === 0) {
           html += '<div class="empty"><span class="icon">📅</span>Aucune recette sélectionnée — coche des recettes dans l\'onglet « Sélection courses » pour remplir le planning.</div>';
           return html;
@@ -716,25 +717,29 @@
         }
 
         html += '<div class="card" style="background:#f8fafc">';
-        DAYS.forEach(function (d) {
-          html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #e2e8f0">';
-          html += '<strong style="width:90px;font-size:.85rem">' + d[1] + '</strong>';
-          SLOTS.forEach(function (s) {
-            var key = d[0] + "-" + s[0];
-            var current = state.planning[key] || "";
-            html += '<span style="display:flex;align-items:center;gap:6px;flex:1;min-width:200px">';
-            html += '<span style="font-size:.72rem;color:#64748b;width:32px">' + s[1] + '</span>';
-            html += '<select class="grow" style="flex:1" onchange="setSlot(\'' + d[0] + '\',\'' + s[0] + '\',this.value)">';
-            // reconstruit les options avec sélection courante
-            selRecipes.forEach(function (r) {
-              var sel = current === r.id ? " selected" : "";
-              html += '<option value="' + r.id + '"' + sel + '>' + esc(r.name) + ' (' + state.selections[r.id] + ' p.)</option>';
+        WEEKS.forEach(function (w) {
+          var wk = w[0];
+          html += '<div style="padding:10px 0 4px"><strong style="font-size:.95rem;color:#059669">📅 ' + w[1] + '</strong></div>';
+          DAYS.forEach(function (d) {
+            html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #e2e8f0">';
+            html += '<strong style="width:90px;font-size:.85rem">' + d[1] + '</strong>';
+            SLOTS.forEach(function (s) {
+              var key = wk + d[0] + "-" + s[0];
+              var current = state.planning[key] || "";
+              html += '<span style="display:flex;align-items:center;gap:6px;flex:1;min-width:200px">';
+              html += '<span style="font-size:.72rem;color:#64748b;width:32px">' + s[1] + '</span>';
+              html += '<select class="grow" style="flex:1" onchange="setSlot(\'' + wk + '\',\'' + d[0] + '\',\'' + s[0] + '\',this.value)">';
+              // reconstruit les options avec sélection courante
+              selRecipes.forEach(function (r) {
+                var sel = current === r.id ? " selected" : "";
+                html += '<option value="' + r.id + '"' + sel + '>' + esc(r.name) + ' (' + state.selections[r.id] + ' p.)</option>';
+              });
+              var free = !selRecipes.some(function (r) { return r.id === current; }) ? " selected" : "";
+              html += '<option value=""' + free + '>— libre —</option>';
+              html += '</select></span>';
             });
-            var free = !selRecipes.some(function (r) { return r.id === current; }) ? " selected" : "";
-            html += '<option value=""' + free + '>— libre —</option>';
-            html += '</select></span>';
+            html += '</div>';
           });
-          html += '</div>';
         });
         html += '</div>';
 
