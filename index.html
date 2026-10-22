@@ -559,14 +559,20 @@
       }
 
       var recipeFilter = "";
-      function filterCards(q) {
-        recipeFilter = normName(q);
+      var recipeFilterRaw = "";
+      function applyFilterDisplay() {
+        if (tab !== "selection") return;
         var cards = document.querySelectorAll("[data-search]");
         for (var i = 0; i < cards.length; i++) {
           var el = cards[i];
           var match = !recipeFilter || el.getAttribute("data-search").indexOf(recipeFilter) !== -1;
           el.style.display = match ? "" : "none";
         }
+      }
+      function filterCards(q) {
+        recipeFilterRaw = q;
+        recipeFilter = normName(q);
+        applyFilterDisplay();
       }
 
       function renderRecipes() {
@@ -579,9 +585,6 @@
         html += '<button class="btn btn-soft" title="Copie un lien contenant tes recettes — utile si l\'outil est hébergé en ligne" onclick="shareLink()">🔗 Lien de partage</button>';
         html += '<button class="btn btn-soft" title="Recharge les recettes du fichier partagé recettes.json (en ligne uniquement)" onclick="sharedNotice=\'\';fetchShared(true)">🔄 Recettes partagées</button>';
         html += '</div>';
-        if (state.recipes.length > 0) {
-          html += '<input class="grow" type="text" placeholder="🔍 Filtrer par nom de recette ou ingrédient…" oninput="filterCards(this.value)" style="margin-bottom:12px">';
-        }
         if (sharedNotice) {
           html += '<div style="background:#f8fafc;border:1px solid #e2e8f0;color:#475569;border-radius:10px;padding:10px 14px;font-size:.8rem;margin-bottom:14px">' + sharedNotice + '</div>';
         }
@@ -623,9 +626,11 @@
           html += '<div class="empty"><span class="icon">🍽️</span>Pas encore de recettes — commence dans l\'onglet « Mes recettes »</div>';
           return html;
         }
+        html += '<input class="grow" type="text" placeholder="🔍 Filtrer par nom de recette ou ingrédient…" value="' + esc(recipeFilterRaw) + '" oninput="filterCards(this.value)" style="margin-bottom:12px">';
         state.recipes.forEach(function (r) {
           var sel = state.selections[r.id] != null;
-          html += '<div class="sel-item' + (sel ? " on" : "") + '">';
+          var searchText = normName(r.name + " " + r.ingredients.map(function (i) { return i.name; }).join(" "));
+          html += '<div class="sel-item' + (sel ? " on" : "") + '" data-search="' + esc(searchText) + '">';
           html += '<label><input type="checkbox" class="checkbox"' + (sel ? " checked" : "") + ' onchange="toggleSelection(\'' + r.id + '\')">';
           html += '<span><strong>' + esc(r.name) + '</strong><br><span class="meta">' + r.ingredients.length + ' ingrédient' + (r.ingredients.length > 1 ? "s" : "") + ' · recette pour ' + esc(r.portions) + ' portions</span></span></label>';
           if (sel) {
@@ -856,6 +861,7 @@
           html += '<div class="danger-note">⚠️ La sauvegarde automatique est indisponible dans ce contexte — tes données ne seront pas conservées entre deux ouvertures.</div>';
         }
         app.innerHTML = html;
+        applyFilterDisplay();
       }
 
       render();
